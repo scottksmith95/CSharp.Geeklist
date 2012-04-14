@@ -20,10 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using CSharp.Geeklist.Api.Models;
 using Spring.Json;
 
-namespace Spring.Social.Geeklist.Api.Impl.Json
+namespace CSharp.Geeklist.Api.Impl.Json
 {
     /// <summary>
     /// JSON deserializer for Geeklist user.
@@ -35,7 +35,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
         {
 			value = value.GetValue("data");
 
-            return new User()
+            return new User
             {
                 Id = value.GetValue<string>("id"),
                 Name = value.GetValue<string>("name"),
@@ -66,7 +66,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Avatar()
+			return new Avatar
 			{
 				SmallLink = value.GetValue<string>("small"),
 				LargeLink = value.GetValue<string>("large"),
@@ -82,7 +82,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Company()
+			return new Company
 			{
 				Title = value.GetValue<string>("title"),
 				Name = value.GetValue<string>("name"),
@@ -98,7 +98,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Social()
+			return new Social
 			{
 				TwitterScreenName = value.GetValue<string>("twitter_screen_name"),
 				TwitterFriends = value.GetValue<long>("twitter_friends_count"),
@@ -115,7 +115,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Criteria()
+			return new Criteria
 			{
 				LookingFor = value.GetValue<List<string>>("looking_for"),
 				AvailabeFor = value.GetValue<List<string>>("available_for"),
@@ -131,7 +131,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new UserStats()
+			return new UserStats
 			{
 				Contributions = value.GetValue<long>("number_of_contributions"),
 				HighFives = value.GetValue<long>("number_of_highfives"),

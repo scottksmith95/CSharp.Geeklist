@@ -18,16 +18,13 @@
 
 #endregion
 
-using System;
-using System.Net;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-
+using CSharp.Geeklist.Api.Interfaces;
 using Spring.Http;
 using Spring.Rest.Client;
 using System.Threading.Tasks;
 
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
 	/// <summary>
 	/// Implementation of <see cref="IHighfiveOperations"/>, providing binding to Geeklists' highfive-oriented REST resources.
@@ -35,32 +32,28 @@ namespace Spring.Social.Geeklist.Api.Impl
 	/// <author>Scott Smith</author>
 	class HighfiveTemplate : AbstractGeeklistOperations, IHighfiveOperations
 	{
-		private RestTemplate restTemplate;
+		private readonly RestTemplate _restTemplate;
 
 		public HighfiveTemplate(RestTemplate restTemplate, bool isAuthorized)
 			: base(isAuthorized)
 		{
-			this.restTemplate = restTemplate;
+			_restTemplate = restTemplate;
 		}
 
 		#region IHighfiveOperations Members
 
 		public HttpResponseMessage Highfive(string type, string gfkId)
 		{
-			this.EnsureIsAuthorized();
-			NameValueCollection request = new NameValueCollection();
-			request.Add("type", type);
-			request.Add("gfk", gfkId);
-			return this.restTemplate.PostForMessage("highfive", request);
+			EnsureIsAuthorized();
+			var request = new NameValueCollection {{"type", type}, {"gfk", gfkId}};
+			return _restTemplate.PostForMessage("highfive", request);
 		}
 
 		public Task<HttpResponseMessage> HighfiveAsync(string type, string gfkId)
 		{
-			this.EnsureIsAuthorized();
-			NameValueCollection request = new NameValueCollection();
-			request.Add("type", type);
-			request.Add("gfk", gfkId);
-			return this.restTemplate.PostForMessageAsync("highfive", request);
+			EnsureIsAuthorized();
+			var request = new NameValueCollection {{"type", type}, {"gfk", gfkId}};
+			return _restTemplate.PostForMessageAsync("highfive", request);
 		}
 
 		#endregion

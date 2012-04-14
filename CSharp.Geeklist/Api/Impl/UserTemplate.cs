@@ -18,16 +18,12 @@
 
 #endregion
 
-using System;
-using System.Net;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-
-using Spring.Http;
+using CSharp.Geeklist.Api.Interfaces;
+using CSharp.Geeklist.Api.Models;
 using Spring.Rest.Client;
 using System.Threading.Tasks;
 
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
     /// <summary>
     /// Implementation of <see cref="IUserOperations"/>, providing binding to Geeklists' user-oriented REST resources.
@@ -35,36 +31,36 @@ namespace Spring.Social.Geeklist.Api.Impl
 	/// <author>Scott Smith</author>
     class UserTemplate : AbstractGeeklistOperations, IUserOperations
     {
-        private RestTemplate restTemplate;
+        private readonly RestTemplate _restTemplate;
 
         public UserTemplate(RestTemplate restTemplate, bool isAuthorized)
             : base(isAuthorized)
         {
-            this.restTemplate = restTemplate;
+            _restTemplate = restTemplate;
         }
 
         #region IUserOperations Members
 
 		public User GetUser() 
         {
-		    this.EnsureIsAuthorized();
-			return this.restTemplate.GetForObject<User>("v1/user");
+		    EnsureIsAuthorized();
+			return _restTemplate.GetForObject<User>("v1/user");
 	    }
 
 	    public User GetUser(string screenName) 
         {
-			return this.restTemplate.GetForObject<User>("v1/users/" + screenName);
+			return _restTemplate.GetForObject<User>("v1/users/" + screenName);
 	    }
 
 		public Task<User> GetUserAsync()
 		{
-			this.EnsureIsAuthorized();
-			return this.restTemplate.GetForObjectAsync<User>("v1/user");
+			EnsureIsAuthorized();
+			return _restTemplate.GetForObjectAsync<User>("v1/user");
 		}
 
 		public Task<User> GetUserAsync(string screenName)
 		{
-			return this.restTemplate.GetForObjectAsync<User>("v1/users/" + screenName);
+			return _restTemplate.GetForObjectAsync<User>("v1/users/" + screenName);
 		}
 
         #endregion

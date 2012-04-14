@@ -18,16 +18,14 @@
 
 #endregion
 
-using System;
-using System.Net;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-
-using Spring.Http;
+using CSharp.Geeklist.Api.Interfaces;
+using CSharp.Geeklist.Api.Models;
 using Spring.Rest.Client;
 using System.Threading.Tasks;
 
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
 	/// <summary>
 	/// Implementation of <see cref="IActivityOperations"/>, providing binding to Geeklists' activity-oriented REST resources.
@@ -35,82 +33,82 @@ namespace Spring.Social.Geeklist.Api.Impl
 	/// <author>Scott Smith</author>
 	class ActivityTemplate : AbstractGeeklistOperations, IActivityOperations
 	{
-		private RestTemplate restTemplate;
+		private readonly RestTemplate _restTemplate;
 
 		public ActivityTemplate(RestTemplate restTemplate, bool isAuthorized)
 			: base(isAuthorized)
 		{
-			this.restTemplate = restTemplate;
+			_restTemplate = restTemplate;
 		}
 
 		#region IActivityOperations Members
 
 		public IList<Activity> GetUserActivities()
 		{
-			return this.GetUserActivities(1, 10);
+			return GetUserActivities(1, 10);
 		}
 
 		public IList<Activity> GetUserActivities(int page, int count)
 		{
-			this.EnsureIsAuthorized();
+			EnsureIsAuthorized();
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObject<IList<Activity>>(this.BuildUrl("user/activity", parameters));
+			return _restTemplate.GetForObject<IList<Activity>>(BuildUrl("user/activity", parameters));
 		}
 
 		public IList<Activity> GetUserActivities(string screenName)
 		{
-			return this.GetUserActivities(screenName, 1, 10);
+			return GetUserActivities(screenName, 1, 10);
 		}
 
 		public IList<Activity> GetUserActivities(string screenName, int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObject<IList<Activity>>(this.BuildUrl("users/" + screenName + "/activity", parameters));
+			return _restTemplate.GetForObject<IList<Activity>>(BuildUrl("users/" + screenName + "/activity", parameters));
 		}
 
 		public IList<Activity> GetAllActivities()
 		{
-			return this.GetAllActivities(1, 10);
+			return GetAllActivities(1, 10);
 		}
 
 		public IList<Activity> GetAllActivities(int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObject<IList<Activity>>(this.BuildUrl("activity", parameters));
+			return _restTemplate.GetForObject<IList<Activity>>(BuildUrl("activity", parameters));
 		}
 
 		public Task<IList<Activity>> GetUserActivitiesAsync()
 		{
-			return this.GetUserActivitiesAsync(1, 10);
+			return GetUserActivitiesAsync(1, 10);
 		}
 
 		public Task<IList<Activity>> GetUserActivitiesAsync(int page, int count)
 		{
-			this.EnsureIsAuthorized();
+			EnsureIsAuthorized();
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObjectAsync<IList<Activity>>(this.BuildUrl("user/activity", parameters));
+			return _restTemplate.GetForObjectAsync<IList<Activity>>(BuildUrl("user/activity", parameters));
 		}
 
 		public Task<IList<Activity>> GetUserActivitiesAsync(string screenName)
 		{
-			return this.GetUserActivitiesAsync(screenName, 1, 10);
+			return GetUserActivitiesAsync(screenName, 1, 10);
 		}
 
 		public Task<IList<Activity>> GetUserActivitiesAsync(string screenName, int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObjectAsync<IList<Activity>>(this.BuildUrl("users/" + screenName + "/activity", parameters));
+			return _restTemplate.GetForObjectAsync<IList<Activity>>(BuildUrl("users/" + screenName + "/activity", parameters));
 		}
 
 		public Task<IList<Activity>> GetAllActivitiesAsync()
 		{
-			return this.GetAllActivitiesAsync(1, 10);
+			return GetAllActivitiesAsync(1, 10);
 		}
 
 		public Task<IList<Activity>> GetAllActivitiesAsync(int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObjectAsync<IList<Activity>>(this.BuildUrl("activity", parameters));
+			return _restTemplate.GetForObjectAsync<IList<Activity>>(BuildUrl("activity", parameters));
 		}
 
 		#endregion

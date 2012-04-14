@@ -18,13 +18,12 @@
 
 #endregion
 
-using System;
+using System.Globalization;
 using System.Text;
 using System.Collections.Specialized;
-
 using Spring.Http;
 
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
     /// <summary>
     /// Base class for Geeklist operations.
@@ -33,16 +32,16 @@ namespace Spring.Social.Geeklist.Api.Impl
     /// <author>Bruno Baia (.NET)</author>
     abstract class AbstractGeeklistOperations
     {
-        private bool isAuthorized;
+        private readonly bool _isAuthorized;
 
-	    public AbstractGeeklistOperations(bool isAuthorized) 
+    	protected AbstractGeeklistOperations(bool isAuthorized) 
         {
-		    this.isAuthorized = isAuthorized;
+		    _isAuthorized = isAuthorized;
 	    }
 
         protected void EnsureIsAuthorized() 
         {
-		    if (!this.isAuthorized) 
+		    if (!_isAuthorized) 
             {
 			    throw new GeeklistApiException(
                     "Authorization is required for the operation, but the API binding was created without authorization.", 
@@ -50,16 +49,9 @@ namespace Spring.Social.Geeklist.Api.Impl
 		    }
 	    }
 
-        protected string BuildUrl(string path, string parameterName, string parameterValue)
+    	protected string BuildUrl(string path, NameValueCollection parameters)
         {
-            NameValueCollection parameters = new NameValueCollection();
-            parameters.Add(parameterName, parameterValue);
-            return this.BuildUrl(path, parameters);
-        }
-
-        protected string BuildUrl(string path, NameValueCollection parameters)
-        {
-            StringBuilder qsBuilder = new StringBuilder();
+            var qsBuilder = new StringBuilder();
             bool isFirst = true;
             foreach (string key in parameters)
             {
@@ -76,15 +68,17 @@ namespace Spring.Social.Geeklist.Api.Impl
                 qsBuilder.Append('=');
                 qsBuilder.Append(HttpUtils.UrlEncode(parameters[key]));
             }
-            return path + qsBuilder.ToString();
+            return path + qsBuilder;
 	    }
 
-		public static NameValueCollection BuildPagingParametersWithCount(int page, int count)
+    	protected static NameValueCollection BuildPagingParametersWithCount(int page, int count)
 		{
-			NameValueCollection parameters = new NameValueCollection();
-			parameters.Add("page", page.ToString());
-			parameters.Add("count", count.ToString());
-			return parameters;
+			var parameters = new NameValueCollection
+			{
+			    {"page", page.ToString(CultureInfo.InvariantCulture)},
+			    {"count", count.ToString(CultureInfo.InvariantCulture)}
+			};
+    		return parameters;
 		}
     }
 }

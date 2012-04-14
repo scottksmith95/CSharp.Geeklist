@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
 	/// Represents a Geeklist micro's information.

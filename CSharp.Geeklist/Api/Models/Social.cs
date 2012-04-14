@@ -19,9 +19,8 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
 	/// Represents a Geeklist user's social information.

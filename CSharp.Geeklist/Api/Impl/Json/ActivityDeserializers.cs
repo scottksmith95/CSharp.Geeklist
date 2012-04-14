@@ -20,10 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using CSharp.Geeklist.Api.Models;
 using Spring.Json;
 
-namespace Spring.Social.Geeklist.Api.Impl.Json
+namespace CSharp.Geeklist.Api.Impl.Json
 {
 	/// <summary>
 	/// JSON deserializer for list of activity. 
@@ -36,7 +36,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 			value = value.GetValue("data");
 
 			IList<Activity> activities = new List<Activity>();
-			foreach (JsonValue itemValue in value.GetValues())
+			foreach (var itemValue in value.GetValues())
 			{
 				activities.Add(mapper.Deserialize<Activity>(itemValue));
 			}
@@ -52,7 +52,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Activity()
+			return new Activity
 			{
 				User = mapper.Deserialize<ShallowUser>(value.GetValue("user")),
 				Gfk = mapper.Deserialize<Gfk>(value.GetValue("gfk")),
@@ -72,7 +72,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Gfk()
+			return new Gfk
 			{
 				Mentions = value.GetValue<List<string>>("mentions"),
 				Hashtags = value.GetValue<List<string>>("hashtags"),

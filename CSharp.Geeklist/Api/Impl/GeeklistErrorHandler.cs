@@ -21,14 +21,13 @@
 using System;
 using System.Net;
 using System.Text;
-
 using Spring.Json;
 using Spring.Http;
 using Spring.Rest.Client;
 using Spring.Rest.Client.Support;
 
 //TODO: Implement Geeklists errors
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
     /// <summary>
     /// Implementation of the <see cref="IResponseErrorHandler"/> that handles errors from Geeklist's REST API, 
@@ -39,7 +38,7 @@ namespace Spring.Social.Geeklist.Api.Impl
     class GeeklistErrorHandler : DefaultResponseErrorHandler
     {
         // Default encoding for JSON
-        private static readonly Encoding DEFAULT_CHARSET = new UTF8Encoding(false); // Remove byte Order Mask (BOM)
+        private static readonly Encoding DefaultCharset = new UTF8Encoding(false); // Remove byte Order Mask (BOM)
 
         /// <summary>
         /// Handles the error in the given response. 
@@ -58,11 +57,11 @@ namespace Spring.Social.Geeklist.Api.Impl
             int type = (int)response.StatusCode / 100;
             if (type == 4)
             {
-                this.HandleClientErrors(response);
+                HandleClientErrors(response);
             }
             else if (type == 5)
             {
-                this.HandleServerErrors(response.StatusCode);
+                HandleServerErrors(response.StatusCode);
             }
 
             // if not otherwise handled, do default handling and wrap with GeeklistApiException
@@ -78,7 +77,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 
         private void HandleClientErrors(HttpResponseMessage<byte[]> response) 
         {
-		    JsonValue errorValue = this.ExtractErrorDetailsFromResponse(response);
+		    JsonValue errorValue = ExtractErrorDetailsFromResponse(response);
 		    if (errorValue == null) 
             {
 			    return; // unexpected error body, can't be handled here
@@ -102,32 +101,34 @@ namespace Spring.Social.Geeklist.Api.Impl
 			    }
 		    }
 
-		    if (response.StatusCode == HttpStatusCode.Unauthorized) 
-            {
-                if (errorText == "Could not authenticate you.")
+		    if (response.StatusCode == HttpStatusCode.Unauthorized)
+		    {
+		    	if (errorText == "Could not authenticate you.")
                 {
                     throw new GeeklistApiException(
                         "Authorization is required for the operation, but the API binding was created without authorization.", 
                         GeeklistApiError.NotAuthorized);
 			    }
-                else if (errorText == "Could not authenticate with OAuth.")
-                {
-                    throw new GeeklistApiException("The authorization has been revoked.", GeeklistApiError.NotAuthorized);
-			    }
-                else 
-                {
-                    throw new GeeklistApiException(errorText ?? response.StatusDescription, GeeklistApiError.NotAuthorized);
-			    }
-		    } 
-            else if (response.StatusCode == HttpStatusCode.Forbidden) 
+
+		    	if (errorText == "Could not authenticate with OAuth.")
+		    	{
+		    		throw new GeeklistApiException("The authorization has been revoked.", GeeklistApiError.NotAuthorized);
+		    	}
+
+		    	throw new GeeklistApiException(errorText ?? response.StatusDescription, GeeklistApiError.NotAuthorized);
+		    }
+		    
+			if (response.StatusCode == HttpStatusCode.Forbidden) 
             {
                 throw new GeeklistApiException(errorText, GeeklistApiError.OperationNotPermitted);
 		    } 
-            else if (response.StatusCode == HttpStatusCode.NotFound) 
+            
+			if (response.StatusCode == HttpStatusCode.NotFound) 
             {
                 throw new GeeklistApiException(errorText, GeeklistApiError.ResourceNotFound);
 		    }
-            else if (response.StatusCode == (HttpStatusCode)420)
+            
+			if (response.StatusCode == (HttpStatusCode)420)
             {
                 throw new GeeklistApiException("The rate limit has been exceeded.", GeeklistApiError.RateLimitExceeded);
             }
@@ -141,11 +142,13 @@ namespace Spring.Social.Geeklist.Api.Impl
                     "Something is broken at Geeklist. Please see http://dev.twitter.com/pages/support to report the issue.", 
                     GeeklistApiError.Server);
 		    } 
-            else if (statusCode == HttpStatusCode.BadGateway) 
+            
+			if (statusCode == HttpStatusCode.BadGateway) 
             {
                 throw new GeeklistApiException("Geeklist is down or is being upgraded.", GeeklistApiError.ServerDown);
 		    } 
-            else if (statusCode == HttpStatusCode.ServiceUnavailable) 
+            
+			if (statusCode == HttpStatusCode.ServiceUnavailable) 
             {
                 throw new GeeklistApiException("Geeklist is overloaded with requests. Try again later.", GeeklistApiError.ServerOverloaded);
 		    }
@@ -158,7 +161,7 @@ namespace Spring.Social.Geeklist.Api.Impl
                 return null;
             }
             MediaType contentType = response.Headers.ContentType;
-            Encoding charset = (contentType != null && contentType.CharSet != null) ? contentType.CharSet : DEFAULT_CHARSET;
+            Encoding charset = (contentType != null && contentType.CharSet != null) ? contentType.CharSet : DefaultCharset;
             string errorDetails = charset.GetString(response.Body, 0, response.Body.Length);
             
             JsonValue result;

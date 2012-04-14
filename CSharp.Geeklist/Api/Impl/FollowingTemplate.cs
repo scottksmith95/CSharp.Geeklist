@@ -18,16 +18,13 @@
 
 #endregion
 
-using System;
-using System.Net;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-
-using Spring.Http;
+using CSharp.Geeklist.Api.Interfaces;
+using CSharp.Geeklist.Api.Models;
 using Spring.Rest.Client;
 using System.Threading.Tasks;
 
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
 	/// <summary>
 	/// Implementation of <see cref="IFollowingOperations"/>, providing binding to Geeklists' following-oriented REST resources.
@@ -35,60 +32,60 @@ namespace Spring.Social.Geeklist.Api.Impl
 	/// <author>Scott Smith</author>
 	class FollowingTemplate : AbstractGeeklistOperations, IFollowingOperations
 	{
-		private RestTemplate restTemplate;
+		private readonly RestTemplate _restTemplate;
 
 		public FollowingTemplate(RestTemplate restTemplate, bool isAuthorized)
 			: base(isAuthorized)
 		{
-			this.restTemplate = restTemplate;
+			_restTemplate = restTemplate;
 		}
 
 		#region IFollowingOperations Members
 
 		public FollowingContainer GetUserFollowing()
 		{
-			return this.GetUserFollowing(1, 10);
+			return GetUserFollowing(1, 10);
 		}
 
 		public FollowingContainer GetUserFollowing(int page, int count)
 		{
-			this.EnsureIsAuthorized();
+			EnsureIsAuthorized();
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObject<FollowingContainer>(this.BuildUrl("user/following", parameters));
+			return _restTemplate.GetForObject<FollowingContainer>(BuildUrl("user/following", parameters));
 		}
 
 		public FollowingContainer GetUserFollowing(string screenName)
 		{
-			return this.GetUserFollowing(screenName, 1, 10);
+			return GetUserFollowing(screenName, 1, 10);
 		}
 
 		public FollowingContainer GetUserFollowing(string screenName, int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObject<FollowingContainer>(this.BuildUrl("users/" + screenName + "/following", parameters));
+			return _restTemplate.GetForObject<FollowingContainer>(BuildUrl("users/" + screenName + "/following", parameters));
 		}
 
 		public Task<FollowingContainer> GetUserFollowingAsync()
 		{
-			return this.GetUserFollowingAsync(1, 10);
+			return GetUserFollowingAsync(1, 10);
 		}
 
 		public Task<FollowingContainer> GetUserFollowingAsync(int page, int count)
 		{
-			this.EnsureIsAuthorized();
+			EnsureIsAuthorized();
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObjectAsync<FollowingContainer>(this.BuildUrl("user/following", parameters));
+			return _restTemplate.GetForObjectAsync<FollowingContainer>(BuildUrl("user/following", parameters));
 		}
 
 		public Task<FollowingContainer> GetUserFollowingAsync(string screenName)
 		{
-			return this.GetUserFollowingAsync(screenName, 1, 10);
+			return GetUserFollowingAsync(screenName, 1, 10);
 		}
 
 		public Task<FollowingContainer> GetUserFollowingAsync(string screenName, int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObjectAsync<FollowingContainer>(this.BuildUrl("users/" + screenName + "/following", parameters));
+			return _restTemplate.GetForObjectAsync<FollowingContainer>(BuildUrl("users/" + screenName + "/following", parameters));
 		}
 
 		#endregion

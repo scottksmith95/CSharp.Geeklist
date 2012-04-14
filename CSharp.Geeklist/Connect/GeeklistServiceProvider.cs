@@ -19,12 +19,11 @@
 #endregion
 
 using System;
-
+using CSharp.Geeklist.Api.Impl;
+using CSharp.Geeklist.Api.Interfaces;
 using Spring.Social.OAuth1;
-using Spring.Social.Geeklist.Api;
-using Spring.Social.Geeklist.Api.Impl;
 
-namespace Spring.Social.Geeklist.Connect
+namespace CSharp.Geeklist.Connect
 {
     /// <summary>
 	/// Geeklist <see cref="IServiceProvider"/> implementation.
@@ -53,7 +52,7 @@ namespace Spring.Social.Geeklist.Connect
         /// <returns>A binding to the service provider's API.</returns>
 		public override IGeeklist GetApi(string accessToken, string secret)
         {
-			return new GeeklistTemplate(this.ConsumerKey, this.ConsumerSecret, accessToken, secret);
+			return new GeeklistTemplate(ConsumerKey, ConsumerSecret, accessToken, secret);
         }
     }
 }

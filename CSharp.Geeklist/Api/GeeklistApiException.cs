@@ -21,8 +21,9 @@
 using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using Spring.Social;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api
 {
     /// <summary>
     /// The exception that is thrown when a error occurs while consuming Geeklist REST API.
@@ -31,14 +32,14 @@ namespace Spring.Social.Geeklist.Api
     [Serializable]
     public class GeeklistApiException : SocialException
     {
-        private GeeklistApiError error;
+        private readonly GeeklistApiError _error;
 
         /// <summary>
         /// Gets the Geeklist error.
         /// </summary>
         public GeeklistApiError Error
         {
-            get { return this.error; }
+            get { return _error; }
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace Spring.Social.Geeklist.Api
         public GeeklistApiException(string message, GeeklistApiError error)
             : base(message)
         {
-            this.error = error;
+            _error = error;
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace Spring.Social.Geeklist.Api
         public GeeklistApiException(string message, Exception innerException)
             : base(message, innerException)
         {
-            this.error = GeeklistApiError.Unknown;
+            _error = GeeklistApiError.Unknown;
         }
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace Spring.Social.Geeklist.Api
         {
             if (info != null)
             {
-                this.error = (GeeklistApiError)info.GetValue("Error", typeof(GeeklistApiError));
+                _error = (GeeklistApiError)info.GetValue("Error", typeof(GeeklistApiError));
             }
         }
 
@@ -101,7 +102,7 @@ namespace Spring.Social.Geeklist.Api
             base.GetObjectData(info, context);
             if (info != null)
             {
-                info.AddValue("Error", this.error);
+                info.AddValue("Error", _error);
             }
         }
     }

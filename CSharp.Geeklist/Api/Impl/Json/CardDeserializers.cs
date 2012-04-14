@@ -20,10 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using CSharp.Geeklist.Api.Models;
 using Spring.Json;
 
-namespace Spring.Social.Geeklist.Api.Impl.Json
+namespace CSharp.Geeklist.Api.Impl.Json
 {
 	/// <summary>
 	/// JSON deserializer for data for cards. 
@@ -52,7 +52,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
 			IList<Card> cards = new List<Card>();
-			foreach (JsonValue itemValue in value.GetValues())
+			foreach (var itemValue in value.GetValues())
 			{
 				cards.Add(mapper.Deserialize<Card>(itemValue));
 			}
@@ -68,7 +68,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Card()
+			return new Card
 			{
 				AuthorId = value.GetValue<string>("author_id"),
 				Created = value.GetValue<DateTime>("created_at"),
@@ -95,7 +95,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new CardStats()
+			return new CardStats
 			{
 				NumberOfViews = value.GetValue<long>("number_of_views"),
 				Views = value.GetValue<long>("views"),
@@ -112,7 +112,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new ShortCode()
+			return new ShortCode
 			{
 				GklstUrl = value.GetValue<string>("gklst_url"),
 				Id = value.GetValue<string>("id"),

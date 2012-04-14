@@ -20,10 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using CSharp.Geeklist.Api.Models;
 using Spring.Json;
 
-namespace Spring.Social.Geeklist.Api.Impl.Json
+namespace CSharp.Geeklist.Api.Impl.Json
 {
 	/// <summary>
 	/// JSON deserializer for data for micros. 
@@ -52,7 +52,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
 			IList<Micro> micros = new List<Micro>();
-			foreach (JsonValue itemValue in value.GetValues())
+			foreach (var itemValue in value.GetValues())
 			{
 				micros.Add(mapper.Deserialize<Micro>(itemValue));
 			}
@@ -68,7 +68,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Micro()
+			return new Micro
 			{
 				Created = value.GetValue<DateTime>("created_at"),
 				Permalink = value.GetValue<string>("permalink"),
@@ -94,7 +94,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Reply()
+			return new Reply
 			{
 				Thread = mapper.Deserialize<Thread>(value.GetValue("thread")),
 				InReplyTo = mapper.Deserialize<InReplyTo>(value.GetValue("in_reply_to"))
@@ -110,7 +110,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Thread()
+			return new Thread
 			{
 				Id = value.GetValue<string>("id"),
 				Status = value.GetValue<string>("status"),
@@ -128,7 +128,7 @@ namespace Spring.Social.Geeklist.Api.Impl.Json
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new InReplyTo()
+			return new InReplyTo
 			{
 				Id = value.GetValue<string>("id"),
 				Status = value.GetValue<string>("status"),

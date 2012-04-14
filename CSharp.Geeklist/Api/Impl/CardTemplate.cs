@@ -18,16 +18,13 @@
 
 #endregion
 
-using System;
-using System.Net;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-
-using Spring.Http;
+using CSharp.Geeklist.Api.Interfaces;
+using CSharp.Geeklist.Api.Models;
 using Spring.Rest.Client;
 using System.Threading.Tasks;
 
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
 	/// <summary>
 	/// Implementation of <see cref="ICardOperations"/>, providing binding to Geeklists' card-oriented REST resources.
@@ -35,86 +32,84 @@ namespace Spring.Social.Geeklist.Api.Impl
 	/// <author>Scott Smith</author>
 	class CardTemplate : AbstractGeeklistOperations, ICardOperations
 	{
-		private RestTemplate restTemplate;
+		private readonly RestTemplate _restTemplate;
 
 		public CardTemplate(RestTemplate restTemplate, bool isAuthorized)
 			: base(isAuthorized)
 		{
-			this.restTemplate = restTemplate;
+			_restTemplate = restTemplate;
 		}
 
 		#region ICardOperations Members
 
 		public CardContainer GetUserCards()
 		{
-			return this.GetUserCards(1, 10);
+			return GetUserCards(1, 10);
 		}
 
 		public CardContainer GetUserCards(int page, int count)
 		{
-			this.EnsureIsAuthorized();
+			EnsureIsAuthorized();
             NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObject<CardContainer>(this.BuildUrl("user/cards", parameters));
+			return _restTemplate.GetForObject<CardContainer>(BuildUrl("user/cards", parameters));
 		}
 
 		public CardContainer GetUserCards(string screenName)
 		{
-			return this.GetUserCards(screenName, 1, 10);
+			return GetUserCards(screenName, 1, 10);
 		}
 
 		public CardContainer GetUserCards(string screenName, int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObject<CardContainer>(this.BuildUrl("users/" + screenName + "/cards", parameters));
+			return _restTemplate.GetForObject<CardContainer>(BuildUrl("users/" + screenName + "/cards", parameters));
 		}
 
 		public Card GetCard(string cardId)
 		{
-			return this.restTemplate.GetForObject<Card>("cards/" + cardId);
+			return _restTemplate.GetForObject<Card>("cards/" + cardId);
 		}
 
 		public Card CreateCard(string headline)
 		{
-			this.EnsureIsAuthorized();
-			NameValueCollection request = new NameValueCollection();
-			request.Add("headline", headline);
-			return this.restTemplate.PostForObject<Card>("cards", request);
+			EnsureIsAuthorized();
+			var request = new NameValueCollection {{"headline", headline}};
+			return _restTemplate.PostForObject<Card>("cards", request);
 		}
 
 		public Task<CardContainer> GetUserCardsAsync()
 		{
-			return this.GetUserCardsAsync(1, 10);
+			return GetUserCardsAsync(1, 10);
 		}
 
 		public Task<CardContainer> GetUserCardsAsync(int page, int count)
 		{
-			this.EnsureIsAuthorized();
+			EnsureIsAuthorized();
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObjectAsync<CardContainer>(this.BuildUrl("user/cards", parameters));
+			return _restTemplate.GetForObjectAsync<CardContainer>(BuildUrl("user/cards", parameters));
 		}
 
 		public Task<CardContainer> GetUserCardsAsync(string screenName)
 		{
-			return this.GetUserCardsAsync(screenName, 1, 10);
+			return GetUserCardsAsync(screenName, 1, 10);
 		}
 
 		public Task<CardContainer> GetUserCardsAsync(string screenName, int page, int count)
 		{
 			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return this.restTemplate.GetForObjectAsync<CardContainer>(this.BuildUrl("users/" + screenName + "/cards", parameters));
+			return _restTemplate.GetForObjectAsync<CardContainer>(BuildUrl("users/" + screenName + "/cards", parameters));
 		}
 
 		public Task<Card> GetCardAsync(string cardId)
 		{
-			return this.restTemplate.GetForObjectAsync<Card>("cards/" + cardId);
+			return _restTemplate.GetForObjectAsync<Card>("cards/" + cardId);
 		}
 
 		public Task<Card> CreateCardAsync(string headline)
 		{
-			this.EnsureIsAuthorized();
-			NameValueCollection request = new NameValueCollection();
-			request.Add("headline", headline);
-			return this.restTemplate.PostForObjectAsync<Card>("cards", request);
+			EnsureIsAuthorized();
+			var request = new NameValueCollection {{"headline", headline}};
+			return _restTemplate.PostForObjectAsync<Card>("cards", request);
 		}
 
 		#endregion

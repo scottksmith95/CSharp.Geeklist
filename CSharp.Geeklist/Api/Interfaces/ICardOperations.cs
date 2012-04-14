@@ -18,14 +18,10 @@
 
 #endregion
 
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Spring.Rest.Client;
-using Spring.Http;
 using System.Threading.Tasks;
+using CSharp.Geeklist.Api.Models;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Interfaces
 {
 	/// <summary>
 	/// Interface defining the operations for searching Geeklist and retrieving card data.
@@ -88,8 +84,8 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="headline">The headline for the new card.</param>
 		/// <returns>The created <see cref="Card"/>.</returns>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		Card CreateCard(string headline);
 
 		/// <summary>
@@ -147,8 +143,8 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="headline">The headline for the new card.</param>
 		/// <returns>The created <see cref="Card"/>.</returns>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		Task<Card> CreateCardAsync(string headline);
 	}
 }

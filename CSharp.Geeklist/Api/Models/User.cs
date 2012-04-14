@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Models
 {
     /// <summary>
     /// Represents a Geeklist user's profile information.
@@ -78,7 +78,7 @@ namespace Spring.Social.Geeklist.Api
 		/// <summary>
 		/// Gets or sets the user's social. ("social")
 		/// </summary>
-		public Social Social { get; set; }
+		public CSharp.Geeklist.Api.Models.Social Social { get; set; }
 
 		/// <summary>
 		/// Gets or sets the user's criteria. ("criteria")
@@ -125,7 +125,7 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		public string ProfileUrl
 		{
-			get { return "http://geekli.st/" + this.ScreenName; }
+			get { return "http://geekli.st/" + ScreenName; }
 		}
     }
 }

@@ -18,14 +18,10 @@
 
 #endregion
 
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Spring.Rest.Client;
 using Spring.Http;
 using System.Threading.Tasks;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Interfaces
 {
 	/// <summary>
 	/// Interface defining the operations for Geeklist highfives.
@@ -38,8 +34,8 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="type">The type of item to highfive. Can be card or micro.</param>
 		/// <param name="gfkId">The id of the item to be highfived.</param>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		HttpResponseMessage Highfive(string type, string gfkId);
 
 		/// <summary>
@@ -47,8 +43,8 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="type">The type of item to highfive. Can be card or micro.</param>
 		/// <param name="gfkId">The id of the item to be highfived.</param>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		Task<HttpResponseMessage> HighfiveAsync(string type, string gfkId);
 	}
 }

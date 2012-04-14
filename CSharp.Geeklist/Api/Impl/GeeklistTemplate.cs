@@ -20,16 +20,16 @@
 
 using System;
 using System.Collections.Generic;
-
+using CSharp.Geeklist.Api.Impl.Json;
+using CSharp.Geeklist.Api.Interfaces;
+using CSharp.Geeklist.Api.Models;
 using Spring.Json;
 using Spring.Rest.Client;
 using Spring.Social.OAuth1;
 using Spring.Http.Converters;
 using Spring.Http.Converters.Json;
 
-using Spring.Social.Geeklist.Api.Impl.Json;
-
-namespace Spring.Social.Geeklist.Api.Impl
+namespace CSharp.Geeklist.Api.Impl
 {
     /// <summary>
     /// This is the central class for interacting with Geeklist.
@@ -50,17 +50,17 @@ namespace Spring.Social.Geeklist.Api.Impl
     /// </para>
     /// </remarks>
     /// <author>Scott Smith</author>
-    public class GeeklistTemplate : AbstractOAuth1ApiBinding, IGeeklist 
+    public sealed class GeeklistTemplate : AbstractOAuth1ApiBinding, IGeeklist 
     {
-		private static readonly Uri API_URI_BASE = new Uri("http://api.geekli.st/v1/");
+		private static readonly Uri ApiUriBase = new Uri("http://api.geekli.st/v1/");
 
-        private IUserOperations userOperations;
-		private ICardOperations cardOperations;
-		private IMicroOperations microOperations;
-		private IFollowerOperations followerOperations;
-		private IFollowingOperations followingOperations;
-		private IActivityOperations activityOperations;
-		private IHighfiveOperations highfiveOperations;
+        private IUserOperations _userOperations;
+		private ICardOperations _cardOperations;
+		private IMicroOperations _microOperations;
+		private IFollowerOperations _followerOperations;
+		private IFollowingOperations _followingOperations;
+		private IActivityOperations _activityOperations;
+		private IHighfiveOperations _highfiveOperations;
 
         /// <summary>
         /// Create a new instance of <see cref="GeeklistTemplate"/> able to perform unauthenticated operations against Geeklist's API.
@@ -73,7 +73,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 	    public GeeklistTemplate() 
             : base()
         {
-            this.InitSubApis();
+            InitSubApis();
 	    }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Spring.Social.Geeklist.Api.Impl
         public GeeklistTemplate(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret) 
             : base(consumerKey, consumerSecret, accessToken, accessTokenSecret)
         {
-            this.InitSubApis();
+            InitSubApis();
 	    }
 
         #region IGeeklist Members
@@ -96,7 +96,7 @@ namespace Spring.Social.Geeklist.Api.Impl
         /// </summary>
         public IUserOperations UserOperations
         {
-            get { return this.userOperations; }
+            get { return _userOperations; }
         }
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 		/// </summary>
 		public ICardOperations CardOperations
 		{
-			get { return this.cardOperations; }
+			get { return _cardOperations; }
 		}
 
 		/// <summary>
@@ -112,7 +112,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 		/// </summary>
 		public IMicroOperations MicroOperations
 		{
-			get { return this.microOperations; }
+			get { return _microOperations; }
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 		/// </summary>
 		public IFollowerOperations FollowerOperations
 		{
-			get { return this.followerOperations; }
+			get { return _followerOperations; }
 		}
 
 		/// <summary>
@@ -128,7 +128,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 		/// </summary>
 		public IFollowingOperations FollowingOperations
 		{
-			get { return this.followingOperations; }
+			get { return _followingOperations; }
 		}
 
 		/// <summary>
@@ -136,7 +136,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 		/// </summary>
 		public IActivityOperations ActivityOperations
 		{
-			get { return this.activityOperations; }
+			get { return _activityOperations; }
 		}
 
 		/// <summary>
@@ -144,7 +144,7 @@ namespace Spring.Social.Geeklist.Api.Impl
 		/// </summary>
 		public IHighfiveOperations HighfiveOperations
 		{
-			get { return this.highfiveOperations; }
+			get { return _highfiveOperations; }
 		}
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Spring.Social.Geeklist.Api.Impl
         /// </remarks>
         public IRestOperations RestOperations
         {
-            get { return this.RestTemplate; }
+            get { return RestTemplate; }
         }
 
         #endregion
@@ -171,7 +171,7 @@ namespace Spring.Social.Geeklist.Api.Impl
         /// <param name="restTemplate">The RestTemplate to configure.</param>
         protected override void ConfigureRestTemplate(RestTemplate restTemplate)
         {
-            restTemplate.BaseAddress = API_URI_BASE;
+            restTemplate.BaseAddress = ApiUriBase;
             restTemplate.ErrorHandler = new GeeklistErrorHandler();
         }
 
@@ -188,7 +188,7 @@ namespace Spring.Social.Geeklist.Api.Impl
         {
             IList<IHttpMessageConverter> converters = base.GetMessageConverters();
             converters.Add(new ByteArrayHttpMessageConverter());
-            converters.Add(this.GetJsonMessageConverter());
+            converters.Add(GetJsonMessageConverter());
             return converters;
         }
 
@@ -198,9 +198,9 @@ namespace Spring.Social.Geeklist.Api.Impl
         /// Override to customize the message converter (for example, to set a custom object mapper or supported media types).
         /// </summary>
         /// <returns>The configured <see cref="SpringJsonHttpMessageConverter"/>.</returns>
-        protected virtual SpringJsonHttpMessageConverter GetJsonMessageConverter()
+        private SpringJsonHttpMessageConverter GetJsonMessageConverter()
         {
-            JsonMapper jsonMapper = new JsonMapper();
+            var jsonMapper = new JsonMapper();
             jsonMapper.RegisterDeserializer(typeof(User), new UserDeserializer());
 			jsonMapper.RegisterDeserializer(typeof(Avatar), new AvatarDeserializer());
 			jsonMapper.RegisterDeserializer(typeof(Company), new CompanyDeserializer());
@@ -229,13 +229,13 @@ namespace Spring.Social.Geeklist.Api.Impl
 
         private void InitSubApis()
         {
-            this.userOperations = new UserTemplate(this.RestTemplate, this.IsAuthorized);
-			this.cardOperations = new CardTemplate(this.RestTemplate, this.IsAuthorized);
-			this.microOperations = new MicroTemplate(this.RestTemplate, this.IsAuthorized);
-			this.followerOperations = new FollowerTemplate(this.RestTemplate, this.IsAuthorized);
-			this.followingOperations = new FollowingTemplate(this.RestTemplate, this.IsAuthorized);
-			this.activityOperations = new ActivityTemplate(this.RestTemplate, this.IsAuthorized);
-			this.highfiveOperations = new HighfiveTemplate(this.RestTemplate, this.IsAuthorized);
+            _userOperations = new UserTemplate(RestTemplate, IsAuthorized);
+			_cardOperations = new CardTemplate(RestTemplate, IsAuthorized);
+			_microOperations = new MicroTemplate(RestTemplate, IsAuthorized);
+			_followerOperations = new FollowerTemplate(RestTemplate, IsAuthorized);
+			_followingOperations = new FollowingTemplate(RestTemplate, IsAuthorized);
+			_activityOperations = new ActivityTemplate(RestTemplate, IsAuthorized);
+			_highfiveOperations = new HighfiveTemplate(RestTemplate, IsAuthorized);
         }
     }
 }

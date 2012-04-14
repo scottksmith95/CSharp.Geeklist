@@ -18,11 +18,10 @@
 
 #endregion
 
-using System;
-
 using Spring.Rest.Client;
+using Spring.Social;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Interfaces
 {
     /// <summary>
     /// Interface specifying a basic set of operations for interacting with Geeklist.

@@ -18,14 +18,10 @@
 
 #endregion
 
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Spring.Rest.Client;
-using Spring.Http;
 using System.Threading.Tasks;
+using CSharp.Geeklist.Api.Models;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Interfaces
 {
     /// <summary>
     /// Interface defining the operations for searching Geeklist and retrieving user data.

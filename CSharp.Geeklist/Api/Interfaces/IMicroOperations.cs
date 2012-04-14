@@ -18,14 +18,10 @@
 
 #endregion
 
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Spring.Rest.Client;
-using Spring.Http;
 using System.Threading.Tasks;
+using CSharp.Geeklist.Api.Models;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Interfaces
 {
 	/// <summary>
 	/// Interface defining the operations for searching Geeklist and retrieving micro data.
@@ -88,8 +84,8 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
 		/// <returns>The created <see cref="Micro"/>.</returns>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		Micro CreateMicro(string status);
 
 		/// <summary>
@@ -99,8 +95,8 @@ namespace Spring.Social.Geeklist.Api
 		/// <param name="type">The type of item being replied to. Can be card or micro.</param>
 		/// <param name="inReplyToId">The id of the card or micro being replied to.</param>
 		/// <returns>The created <see cref="Micro"/>.</returns>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		Micro CreateMicro(string status, string type, string inReplyToId);
 
 		/// <summary>
@@ -158,8 +154,8 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
 		/// <returns>The created <see cref="Micro"/>.</returns>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		Task<Micro> CreateMicroAsync(string status);
 
 		/// <summary>
@@ -169,8 +165,8 @@ namespace Spring.Social.Geeklist.Api
 		/// <param name="type">The type of item being replied to. Can be card or micro.</param>
 		/// <param name="inReplyToId">The id of the card or micro being replied to.</param>
 		/// <returns>The created <see cref="Micro"/>.</returns>
-		/// <exception cref="GeekListApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeekListApiException">If OAuth credentials was not provided.</exception>
+		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
 		Task<Micro> CreateMicroAsync(string status, string type, string inReplyToId);
 	}
 }

@@ -18,14 +18,10 @@
 
 #endregion
 
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Spring.Rest.Client;
-using Spring.Http;
 using System.Threading.Tasks;
+using CSharp.Geeklist.Api.Models;
 
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api.Interfaces
 {
 	/// <summary>
 	/// Interface defining the operations for searching Geeklist and retrieving following data.
@@ -46,7 +42,7 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Following"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="FollowingContainer"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
 		/// <returns>A <see cref="FollowingContainer"/> with users the authenticating user is following.</returns>
@@ -68,7 +64,7 @@ namespace Spring.Social.Geeklist.Api
 		/// <param name="screenName">The screen name of the user to retrieve the list of users they are following.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Following"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="FollowingContainer"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
 		/// <returns>A <see cref="FollowingContainer"/> with users the specified user is following.</returns>
@@ -88,7 +84,7 @@ namespace Spring.Social.Geeklist.Api
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Following"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="FollowingContainer"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
 		/// <returns>A <see cref="FollowingContainer"/> with users the authenticating user is following.</returns>
@@ -110,7 +106,7 @@ namespace Spring.Social.Geeklist.Api
 		/// <param name="screenName">The screen name of the user to retrieve the list of users they are following.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Following"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="FollowingContainer"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
 		/// <returns>A <see cref="FollowingContainer"/> with users the specified user is following.</returns>

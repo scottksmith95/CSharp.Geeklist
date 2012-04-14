@@ -18,10 +18,8 @@
 
 #endregion
 
-using System;
-
 //TODO: Implement Geeklists errors
-namespace Spring.Social.Geeklist.Api
+namespace CSharp.Geeklist.Api
 {
     /// <summary>
     /// The <see cref="GeeklistApiError"/> enumeration is used by the <see cref="GeeklistApiException"/> class 

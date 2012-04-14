@@ -18,12 +18,11 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Globalization;
+using CSharp.Geeklist.Api.Models;
 using Spring.Json;
 
-namespace Spring.Social.Geeklist.Api.Impl.Json
+namespace CSharp.Geeklist.Api.Impl.Json
 {
 	/// <summary>
 	/// JSON deserializer for data for followers. 
