@@ -26,15 +26,13 @@ using Spring.Http;
 using Spring.Rest.Client;
 using Spring.Rest.Client.Support;
 
-//TODO: Implement Geeklists errors
 namespace CSharp.Geeklist.Api.Impl
 {
     /// <summary>
     /// Implementation of the <see cref="IResponseErrorHandler"/> that handles errors from Geeklist's REST API, 
     /// interpreting them into appropriate exceptions.
     /// </summary>
-    /// <author>Craig Walls</author>
-    /// <author>Bruno Baia (.NET)</author>
+    /// <author>Scott Smith</author>
     class GeeklistErrorHandler : DefaultResponseErrorHandler
     {
         // Default encoding for JSON
@@ -54,15 +52,18 @@ namespace CSharp.Geeklist.Api.Impl
         /// <param name="response">The response message with the error.</param>
         public override void HandleError(Uri requestUri, HttpMethod requestMethod, HttpResponseMessage<byte[]> response)
         {
-            int type = (int)response.StatusCode / 100;
-            if (type == 4)
-            {
-                HandleClientErrors(response);
-            }
-            else if (type == 5)
-            {
-                HandleServerErrors(response.StatusCode);
-            }
+			if (response == null) throw new ArgumentNullException("response");
+
+			var type = (int)response.StatusCode / 100;
+			switch (type)
+			{
+				case 4:
+					HandleClientErrors(response.StatusCode);
+					break;
+				case 5:
+					HandleServerErrors(response.StatusCode);
+					break;
+			}
 
             // if not otherwise handled, do default handling and wrap with GeeklistApiException
             try
@@ -75,97 +76,18 @@ namespace CSharp.Geeklist.Api.Impl
             }
         }
 
-        private void HandleClientErrors(HttpResponseMessage<byte[]> response) 
-        {
-		    JsonValue errorValue = ExtractErrorDetailsFromResponse(response);
-		    if (errorValue == null) 
-            {
-			    return; // unexpected error body, can't be handled here
-		    }
+		private void HandleClientErrors(HttpStatusCode statusCode)
+		{
+			throw new GeeklistApiException(
+				"The server indicated a client error has occured and returned the following HTTP status code: " + statusCode,
+				GeeklistApiError.ClientError);
+		}
 
-		    string errorText = null;
-		    if (errorValue.ContainsName("error")) 
-            {
-			    errorText = errorValue.GetValue<string>("error");
-		    } 
-            else if(errorValue.ContainsName("errors")) 
-            {
-			    JsonValue errorsValue = errorValue.GetValue("errors");			
-			    if (errorsValue.IsArray) 
-                {
-				    errorText = errorsValue.GetValue(0).GetValue<string>("message");
-			    } 
-                else if (errorsValue.IsString) 
-                {
-				    errorText = errorsValue.GetValue<string>();
-			    }
-		    }
-
-		    if (response.StatusCode == HttpStatusCode.Unauthorized)
-		    {
-		    	if (errorText == "Could not authenticate you.")
-                {
-                    throw new GeeklistApiException(
-                        "Authorization is required for the operation, but the API binding was created without authorization.", 
-                        GeeklistApiError.NotAuthorized);
-			    }
-
-		    	if (errorText == "Could not authenticate with OAuth.")
-		    	{
-		    		throw new GeeklistApiException("The authorization has been revoked.", GeeklistApiError.NotAuthorized);
-		    	}
-
-		    	throw new GeeklistApiException(errorText ?? response.StatusDescription, GeeklistApiError.NotAuthorized);
-		    }
-		    
-			if (response.StatusCode == HttpStatusCode.Forbidden) 
-            {
-                throw new GeeklistApiException(errorText, GeeklistApiError.OperationNotPermitted);
-		    } 
-            
-			if (response.StatusCode == HttpStatusCode.NotFound) 
-            {
-                throw new GeeklistApiException(errorText, GeeklistApiError.ResourceNotFound);
-		    }
-            
-			if (response.StatusCode == (HttpStatusCode)420)
-            {
-                throw new GeeklistApiException("The rate limit has been exceeded.", GeeklistApiError.RateLimitExceeded);
-            }
-	    }
-
-	    private void HandleServerErrors(HttpStatusCode statusCode)
-        {
-		    if (statusCode == HttpStatusCode.InternalServerError) 
-            {
-                throw new GeeklistApiException(
-                    "Something is broken at Geeklist. Please see http://dev.twitter.com/pages/support to report the issue.", 
-                    GeeklistApiError.Server);
-		    } 
-            
-			if (statusCode == HttpStatusCode.BadGateway) 
-            {
-                throw new GeeklistApiException("Geeklist is down or is being upgraded.", GeeklistApiError.ServerDown);
-		    } 
-            
-			if (statusCode == HttpStatusCode.ServiceUnavailable) 
-            {
-                throw new GeeklistApiException("Geeklist is overloaded with requests. Try again later.", GeeklistApiError.ServerOverloaded);
-		    }
-	    }
-
-        private JsonValue ExtractErrorDetailsFromResponse(HttpResponseMessage<byte[]> response) 
-        {
-            if (response.Body == null)
-            {
-                return null;
-            }
-            MediaType contentType = response.Headers.ContentType;
-            Encoding charset = (contentType != null && contentType.CharSet != null) ? contentType.CharSet : DefaultCharset;
-            string errorDetails = charset.GetString(response.Body, 0, response.Body.Length);
-            
-            JsonValue result;
-            return JsonValue.TryParse(errorDetails, out result) ? result : null;
-	    }
+		private void HandleServerErrors(HttpStatusCode statusCode)
+		{
+			throw new GeeklistApiException(
+				"The server indicated a server error has occured and returned the following HTTP status code: " + statusCode,
+				GeeklistApiError.ServerError);
+		}
     }
 }

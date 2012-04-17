@@ -28,7 +28,7 @@ namespace CSharp.Geeklist.Api
     /// <summary>
     /// The exception that is thrown when a error occurs while consuming Geeklist REST API.
     /// </summary>
-    /// <author>Bruno Baia</author>
+    /// <author>Scott Smith</author>
     [Serializable]
     public class GeeklistApiException : SocialException
     {
@@ -61,7 +61,7 @@ namespace CSharp.Geeklist.Api
         public GeeklistApiException(string message, Exception innerException)
             : base(message, innerException)
         {
-            _error = GeeklistApiError.Unknown;
+            _error = GeeklistApiError.ServerError;
         }
 
         /// <summary>

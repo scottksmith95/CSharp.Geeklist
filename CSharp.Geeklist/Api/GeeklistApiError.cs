@@ -25,47 +25,17 @@ namespace CSharp.Geeklist.Api
     /// The <see cref="GeeklistApiError"/> enumeration is used by the <see cref="GeeklistApiException"/> class 
     /// to indicate what kind of error caused the exception.
     /// </summary>
-    /// <author>Bruno Baia</author>
+    /// <author>Scott Smith</author>
     public enum GeeklistApiError
     {
-        /// <summary>
-        /// Unknown.
-        /// </summary>
-        Unknown,
+		/// <summary>
+		/// 400 status codes.
+		/// </summary>
+		ClientError,
 
-        /// <summary>
-        /// Bad, expired or missing OAuth token. 
-        /// </summary>
-        NotAuthorized,
-
-        /// <summary>
-        /// Invalid operation attempted.
-        /// </summary>
-        OperationNotPermitted,
-
-        /// <summary>
-        /// Resource could not be found.
-        /// </summary>
-        ResourceNotFound,
-
-        /// <summary>
-        /// Requests are being rate-limited.
-        /// </summary>
-        RateLimitExceeded,
-
-        /// <summary>
-        /// Internal server error.
-        /// </summary>
-        Server,
-
-        /// <summary>
-        /// Server is down or is being upgraded.
-        /// </summary>
-        ServerDown,
-
-        /// <summary>
-        /// Server is experiencing high load.
-        /// </summary>
-        ServerOverloaded
+		/// <summary>
+		/// 500 status codes.
+		/// </summary>
+		ServerError
     }
 }

@@ -45,7 +45,7 @@ namespace CSharp.Geeklist.Api.Impl
             {
 			    throw new GeeklistApiException(
                     "Authorization is required for the operation, but the API binding was created without authorization.", 
-                    GeeklistApiError.NotAuthorized);
+                    GeeklistApiError.ClientError);
 		    }
 	    }
 
