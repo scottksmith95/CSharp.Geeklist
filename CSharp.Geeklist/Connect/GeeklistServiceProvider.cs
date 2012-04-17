@@ -44,6 +44,15 @@ namespace CSharp.Geeklist.Connect
         {
         }
 
+		/// <summary>
+		/// Returns an API interface allowing the client application to access unprotected resources.
+		/// </summary>
+		/// <returns>A binding to the service provider's API.</returns>
+		public IGeeklist GetAPi()
+		{
+			return new GeeklistTemplate();
+		}
+
         /// <summary>
         /// Returns an API interface allowing the client application to access protected resources on behalf of a user.
         /// </summary>
