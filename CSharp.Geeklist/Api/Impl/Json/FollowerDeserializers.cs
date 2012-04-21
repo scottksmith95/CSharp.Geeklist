@@ -18,9 +18,9 @@
 
 #endregion
 
-using System.Collections.Generic;
 using CSharp.Geeklist.Api.Models;
 using Spring.Json;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Impl.Json
 {
@@ -28,17 +28,13 @@ namespace CSharp.Geeklist.Api.Impl.Json
 	/// JSON deserializer for data for followers. 
 	/// </summary>
 	/// <author>Scott Smith</author>
-	class FollowerContainerDeserializer : IJsonDeserializer
+	class FollowersDeserializer : IJsonDeserializer
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			value = value.GetValue("data");
-
-			return new FollowerContainer
-			{
-				TotalFollowers = value.GetValue<long>("total_followers"),
-				Followers = mapper.Deserialize<List<User>>(value.GetValue("followers"))
-			};
+			var deserializedObject = JsonConvert.DeserializeObject<FollowersResponse>(value.ToString());
+			deserializedObject.RawJson = value.ToString();
+			return deserializedObject;
 		}
 	}
 }

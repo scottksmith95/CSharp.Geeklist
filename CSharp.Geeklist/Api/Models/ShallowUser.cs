@@ -19,29 +19,24 @@
 #endregion
 
 using System;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist user's shallow profile information.
+	/// Represents a Geeklist shallow user.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
-	public class ShallowUser 
+	public class ShallowUser
 	{
-		/// <summary>
-		/// Gets or sets the user's ID. ("id")
-		/// </summary>
+		[JsonProperty("id")]
 		public string Id { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's screen name. ("screen_name")
-		/// </summary>
+		[JsonProperty("screen_name")]
 		public string ScreenName { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's avatar. ("avatar")
-		/// </summary>
+		[JsonProperty("avatar")]
 		public Avatar Avatar { get; set; }
 	}
 }

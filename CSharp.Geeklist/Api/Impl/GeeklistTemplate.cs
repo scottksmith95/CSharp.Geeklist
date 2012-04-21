@@ -52,7 +52,8 @@ namespace CSharp.Geeklist.Api.Impl
     /// <author>Scott Smith</author>
     public sealed class GeeklistTemplate : AbstractOAuth1ApiBinding, IGeeklist 
     {
-		private static readonly Uri ApiUriBase = new Uri("http://api.geekli.st/v1/");
+		//TODO: Change the Url to the live version of Geeklist's API
+		private static readonly Uri ApiUriBase = new Uri("http://sandbox-api.geekli.st/v1/");
 
         private IUserOperations _userOperations;
 		private ICardOperations _cardOperations;
@@ -201,28 +202,14 @@ namespace CSharp.Geeklist.Api.Impl
         private SpringJsonHttpMessageConverter GetJsonMessageConverter()
         {
             var jsonMapper = new JsonMapper();
-            jsonMapper.RegisterDeserializer(typeof(User), new UserDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Avatar), new AvatarDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Company), new CompanyDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Social), new SocialDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Criteria), new CriteriaDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(UserStats), new UserStatsDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(CardContainer), new CardContainerDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(IList<Card>), new CardListDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Card), new CardDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(CardStats), new CardStatsDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(ShortCode), new ShortCodeDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(MicroContainer), new MicroContainerDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(IList<Micro>), new MicroListDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Micro), new MicroDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Reply), new ReplyDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Thread), new ThreadDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(InReplyTo), new InReplyToDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(FollowerContainer), new FollowerContainerDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(FollowingContainer), new FollowingContainerDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(IList<Activity>), new ActivityListDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Activity), new ActivityDeserializer());
-			jsonMapper.RegisterDeserializer(typeof(Gfk), new GfkDeserializer());
+            jsonMapper.RegisterDeserializer(typeof(UserResponse), new UserDeserializer());
+			jsonMapper.RegisterDeserializer(typeof(CardResponse), new CardDeserializer());
+			jsonMapper.RegisterDeserializer(typeof(CardsResponse), new CardsDeserializer());
+			jsonMapper.RegisterDeserializer(typeof(MicroResponse), new MicroDeserializer());
+			jsonMapper.RegisterDeserializer(typeof(MicrosResponse), new MicrosDeserializer());
+			jsonMapper.RegisterDeserializer(typeof(FollowersResponse), new FollowersDeserializer());
+			jsonMapper.RegisterDeserializer(typeof(FollowingResponse), new FollowingDeserializer());
+			jsonMapper.RegisterDeserializer(typeof(ActivitiesResponse), new ActivitiesDeserializer());
 
             return new SpringJsonHttpMessageConverter(jsonMapper);
         }

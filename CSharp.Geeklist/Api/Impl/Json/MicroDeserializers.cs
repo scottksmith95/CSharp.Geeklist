@@ -18,123 +18,37 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
 using CSharp.Geeklist.Api.Models;
+using Newtonsoft.Json;
 using Spring.Json;
 
 namespace CSharp.Geeklist.Api.Impl.Json
 {
 	/// <summary>
-	/// JSON deserializer for data for micros. 
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class MicroContainerDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			value = value.GetValue("data");
-
-			return new MicroContainer
-			{
-				TotalMicros = value.GetValue<long>("total_micros"),
-				Micros = mapper.Deserialize<List<Micro>>(value.GetValue("micros"))
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for list of micros. 
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class MicroListDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			IList<Micro> micros = new List<Micro>();
-			foreach (var itemValue in value.GetValues())
-			{
-				micros.Add(mapper.Deserialize<Micro>(itemValue));
-			}
-			return micros;
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist micro.
+	/// JSON deserializer for a micro. 
 	/// </summary>
 	/// <author>Scott Smith</author>
 	class MicroDeserializer : IJsonDeserializer
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Micro
-			{
-				Created = value.GetValue<DateTime>("created_at"),
-				Permalink = value.GetValue<string>("permalink"),
-				Slug = value.GetValue<string>("slug"),
-				Status = value.GetValue<string>("status"),
-				Updated = value.GetValue<DateTime>("updated_at"),
-				Mentions = value.GetValue<List<string>>("mentions"),
-				Reply = mapper.Deserialize<Reply>(value.GetValue("reply")),
-				ShortCode = mapper.Deserialize<ShortCode>(value.GetValue("short_code")),
-				User = mapper.Deserialize<ShallowUser>(value.GetValue("user")),
-				Id = value.GetValue<string>("id"),
-				HasHighFived = value.GetValue<bool>("has_highfived"),
-				IsAuthor = value.GetValue<bool>("is_author")
-			};
+			var deserializedObject = JsonConvert.DeserializeObject<MicroResponse>(value.ToString());
+			deserializedObject.RawJson = value.ToString();
+			return deserializedObject;
 		}
 	}
 
 	/// <summary>
-	/// JSON deserializer for Geeklist micro stats.
+	/// JSON deserializer for micros. 
 	/// </summary>
 	/// <author>Scott Smith</author>
-	class ReplyDeserializer : IJsonDeserializer
+	class MicrosDeserializer : IJsonDeserializer
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			return new Reply
-			{
-				Thread = mapper.Deserialize<Thread>(value.GetValue("thread")),
-				InReplyTo = mapper.Deserialize<InReplyTo>(value.GetValue("in_reply_to"))
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist micro stats.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class ThreadDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new Thread
-			{
-				Id = value.GetValue<string>("id"),
-				Status = value.GetValue<string>("status"),
-				Permalink = value.GetValue<string>("permalink"),
-				Type = value.GetValue<string>("type"),
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist micro stats.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class InReplyToDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new InReplyTo
-			{
-				Id = value.GetValue<string>("id"),
-				Status = value.GetValue<string>("status"),
-				Permalink = value.GetValue<string>("permalink"),
-				Type = value.GetValue<string>("type"),
-			};
+			var deserializedObject = JsonConvert.DeserializeObject<MicrosResponse>(value.ToString());
+			deserializedObject.RawJson = value.ToString();
+			return deserializedObject;
 		}
 	}
 }

@@ -18,6 +18,7 @@
 
 #endregion
 
+using CSharp.Geeklist.Api.Enums;
 using Spring.Http;
 using System.Threading.Tasks;
 
@@ -32,19 +33,17 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <summary>
 		/// Highfives the specified card or micro
 		/// </summary>
-		/// <param name="type">The type of item to highfive. Can be card or micro.</param>
-		/// <param name="gfkId">The id of the item to be highfived.</param>
+		/// <param name="type">The type of item to highfive.</param>
+		/// <param name="itemId">The id of the item to be highfived.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		HttpResponseMessage Highfive(string type, string gfkId);
+		HttpResponseMessage Highfive(HighfiveType type, string itemId);
 
 		/// <summary>
 		/// Asynchronously highfives the specified card or micro
 		/// </summary>
-		/// <param name="type">The type of item to highfive. Can be card or micro.</param>
-		/// <param name="gfkId">The id of the item to be highfived.</param>
+		/// <param name="type">The type of item to highfive.</param>
+		/// <param name="itemId">The id of the item to be highfived.</param>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<HttpResponseMessage> HighfiveAsync(string type, string gfkId);
+		Task<HttpResponseMessage> HighfiveAsync(HighfiveType type, string itemId);
 	}
 }

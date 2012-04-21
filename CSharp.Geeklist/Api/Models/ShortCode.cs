@@ -19,24 +19,21 @@
 #endregion
 
 using System;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist micro's short code.
+	/// Represents a Geeklist short code.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class ShortCode
 	{
-		/// <summary>
-		/// Gets or sets the crieria's looking for list. ("gklst_url")
-		/// </summary>
-		public string GklstUrl { get; set; }
-
-		/// <summary>
-		/// Gets or sets the criteria's available for list. ("id")
-		/// </summary>
+		[JsonProperty("id")]
 		public string Id { get; set; }
+
+		[JsonProperty("gklst_url")]
+		public string GklstUrl { get; set; }
 	}
 }

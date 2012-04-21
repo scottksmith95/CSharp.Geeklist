@@ -19,6 +19,7 @@
 #endregion
 
 using System.Collections.Specialized;
+using CSharp.Geeklist.Api.Enums;
 using CSharp.Geeklist.Api.Interfaces;
 using Spring.Http;
 using Spring.Rest.Client;
@@ -42,17 +43,17 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region IHighfiveOperations Members
 
-		public HttpResponseMessage Highfive(string type, string gfkId)
+		public HttpResponseMessage Highfive(HighfiveType type, string itemId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection {{"type", type}, {"gfk", gfkId}};
+			var request = new NameValueCollection { { "type", type.ToString().ToLower() }, { "gfk", itemId } };
 			return _restTemplate.PostForMessage("highfive", request);
 		}
 
-		public Task<HttpResponseMessage> HighfiveAsync(string type, string gfkId)
+		public Task<HttpResponseMessage> HighfiveAsync(HighfiveType type, string itemId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection {{"type", type}, {"gfk", gfkId}};
+			var request = new NameValueCollection { { "type", type.ToString().ToLower() }, { "gfk", itemId } };
 			return _restTemplate.PostForMessageAsync("highfive", request);
 		}
 

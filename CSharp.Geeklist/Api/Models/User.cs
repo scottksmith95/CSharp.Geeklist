@@ -20,112 +20,131 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
-    /// <summary>
-    /// Represents a Geeklist user's profile information.
-    /// </summary>
+	/// <summary>
+	/// Represents a Geeklist user.
+	/// </summary>
 	/// <author>Scott Smith</author>
-    [Serializable]
-    public class User 
-    {
-        /// <summary>
-        /// Gets or sets the user's ID. ("id")
-        /// </summary>
-	    public string Id { get; set; }
+	[Serializable]
+	public class User
+	{
+		[JsonProperty("active_at")]
+		public string ActiveAt { get; set; }
 
-        /// <summary>
-        /// Gets or sets the user's full name. ("name")
-        /// </summary>
-        public string Name { get; set; }
-
-		/// <summary>
-		/// Gets or sets the user's screen name. ("screen_name")
-		/// </summary>
-		public string ScreenName { get; set; }
-
-		/// <summary>
-		/// Gets or sets the user's avatar. ("avatar")
-		/// </summary>
-		public Avatar Avatar { get; set; }
-
-		/// <summary>
-		/// Gets or sets the user's blog link. ("blog_link")
-		/// </summary>
-		public string BlogLink { get; set; }
-
-		/// <summary>
-		/// Gets or sets the user's company. ("company")
-		/// </summary>
-		public Company Company { get; set; }
-
-		/// <summary>
-		/// Gets or sets the user's location. ("location")
-		/// </summary>
-		public string Location { get; set; }
-
-		/// <summary>
-		/// Gets or sets the user's bio. ("bio")
-		/// </summary>
+		[JsonProperty("bio")]
 		public string Bio { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's social links. ("social_links")
-		/// </summary>
+		[JsonProperty("blog_link")]
+		public string BlogLink { get; set; }
+
+		[JsonProperty("created_at")]
+		public string CreatedAt { get; set; }
+
+		[JsonProperty("email")]
+		public string Email { get; set; }
+
+		[JsonProperty("featured_cards")]
+		public List<string> FeaturedCards { get; set; }
+
+		[JsonProperty("is_beta")]
+		public bool IsBeta { get; set; }
+
+		[JsonProperty("is_featured")]
+		public bool IsFeatured { get; set; }
+
+		[JsonProperty("is_trending")]
+		public bool IsTrending { get; set; }
+
+		[JsonProperty("location")]
+		public string Location { get; set; }
+
+		[JsonProperty("name")]
+		public string Name { get; set; }
+
+		[JsonProperty("screen_name")]
+		public string ScreenName { get; set; }
+
+		[JsonProperty("social_links")]
 		public List<string> SocialLinks { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's social. ("social")
-		/// </summary>
-		public CSharp.Geeklist.Api.Models.Social Social { get; set; }
+		[JsonProperty("trending_at")]
+		public string TrendingAt { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's criteria. ("criteria")
-		/// </summary>
+		[JsonProperty("trending_hist")]
+		public List<TrendingHistory> TrendingHist { get; set; }
+
+		[JsonProperty("settings")]
+		public Settings Settings { get; set; }
+
+		[JsonProperty("criteria")]
 		public Criteria Criteria { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's stats. ("stats")
-		/// </summary>
-		public UserStats Stats { get; set; }
+		[JsonProperty("social")]
+		public Social Social { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's beta status. ("is_beta")
-		/// </summary>
-		public bool Beta { get; set; }
+		[JsonProperty("company")]
+		public Company Company { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's created date. ("created_at")
-		/// </summary>
-		public DateTime Created { get; set; }
+		[JsonProperty("avatar")]
+		public Avatar Avatar { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's last updated date. ("updated_at")
-		/// </summary>
-		public DateTime Updated { get; set; }
+		[JsonProperty("id")]
+		public string Id { get; set; }
+	}
 
-		/// <summary>
-		/// Gets or sets the user's last active date. ("active_at")
-		/// </summary>
-		public DateTime Active { get; set; }
+	/// <summary>
+	/// Represents a Geeklist user settings.
+	/// </summary>
+	/// <author>Scott Smith</author>
+	[Serializable]
+	public class Settings
+	{
+		[JsonProperty("h5")]
+		public H5Settings H5 { get; set; }
 
-		/// <summary>
-		/// Gets or sets the user's last trending date. ("trending_at")
-		/// </summary>
-		public DateTime Trending { get; set; }
+		[JsonProperty("micro")]
+		public MicroSettings Micro { get; set; }
+	}
 
-		/// <summary>
-		/// Gets or sets the user's trending history. ("trending_hist")
-		/// </summary>
-		public List<string> TrendingHistory { get; set; }
+	/// <summary>
+	/// Represents a Geeklist user H5 settings.
+	/// </summary>
+	/// <author>Scott Smith</author>
+	[Serializable]
+	public class H5Settings
+	{
+		[JsonProperty("tweet")]
+		public bool Tweet { get; set; }
+	}
 
-		/// <summary>
-		/// Gets the URL of the user's profile.
-		/// </summary>
-		public string ProfileUrl
-		{
-			get { return "http://geekli.st/" + ScreenName; }
-		}
-    }
+	/// <summary>
+	/// Represents a Geeklist user micro settings.
+	/// </summary>
+	/// <author>Scott Smith</author>
+	[Serializable]
+	public class MicroSettings
+	{
+		[JsonProperty("card")]
+		public CardSettings Card { get; set; }
+
+		[JsonProperty("tweet")]
+		public bool Tweet { get; set; }
+	}
+
+	/// <summary>
+	/// Represents a Geeklist user card settings.
+	/// </summary>
+	/// <author>Scott Smith</author>
+	[Serializable]
+	public class CardSettings
+	{
+		[JsonProperty("headline")]
+		public string Headline { get; set; }
+
+		[JsonProperty("eid")]
+		public string Id { get; set; }
+	}
 }

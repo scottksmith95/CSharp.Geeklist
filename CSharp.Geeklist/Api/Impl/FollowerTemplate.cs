@@ -43,78 +43,78 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region IFollowerOperations Members
 
-		public FollowerContainer GetUserFollowers()
+		public FollowersResponse GetUserFollowers()
 		{
 			return GetUserFollowers(1, 10);
 		}
 
-		public FollowerContainer GetUserFollowers(int page, int count)
+		public FollowersResponse GetUserFollowers(int page, int count)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<FollowerContainer>(BuildUrl("user/followers", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<FollowersResponse>(BuildUrl("user/followers", parameters));
 		}
 
-		public FollowerContainer GetUserFollowers(string screenName)
+		public FollowersResponse GetUserFollowers(string screenName)
 		{
 			return GetUserFollowers(screenName, 1, 10);
 		}
 
-		public FollowerContainer GetUserFollowers(string screenName, int page, int count)
+		public FollowersResponse GetUserFollowers(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<FollowerContainer>(BuildUrl("users/" + screenName + "/followers", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<FollowersResponse>(BuildUrl("users/" + screenName + "/followers", parameters));
 		}
 
-		public HttpResponseMessage Follow(string userId)
+		public HttpResponseMessage StartFollowing(string userId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection {{"user", userId}, {"type", "follow"}};
-			return _restTemplate.PostForMessage("follow", request);
+			var request = new NameValueCollection {{"user", userId}, {"action", "follow"}};
+			return _restTemplate.PostForMessage("user/follow", request);
 		}
 
-		public HttpResponseMessage UnFollow(string userId)
+		public HttpResponseMessage StopFollowing(string userId)
 		{
 			EnsureIsAuthorized();
 			var request = new NameValueCollection {{"user", userId}};
-			return _restTemplate.PostForMessage("follow", request);
+			return _restTemplate.PostForMessage("user/follow", request);
 		}
 
-		public Task<FollowerContainer> GetUserFollowersAsync()
+		public Task<FollowersResponse> GetUserFollowersAsync()
 		{
 			return GetUserFollowersAsync(1, 10);
 		}
 
-		public Task<FollowerContainer> GetUserFollowersAsync(int page, int count)
+		public Task<FollowersResponse> GetUserFollowersAsync(int page, int count)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<FollowerContainer>(BuildUrl("user/followers", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<FollowersResponse>(BuildUrl("user/followers", parameters));
 		}
 
-		public Task<FollowerContainer> GetUserFollowersAsync(string screenName)
+		public Task<FollowersResponse> GetUserFollowersAsync(string screenName)
 		{
 			return GetUserFollowersAsync(screenName, 1, 10);
 		}
 
-		public Task<FollowerContainer> GetUserFollowersAsync(string screenName, int page, int count)
+		public Task<FollowersResponse> GetUserFollowersAsync(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<FollowerContainer>(BuildUrl("users/" + screenName + "/followers", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<FollowersResponse>(BuildUrl("users/" + screenName + "/followers", parameters));
 		}
 
-		public Task<HttpResponseMessage> FollowAsync(string userId)
+		public Task<HttpResponseMessage> StartFollowingAsync(string userId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection {{"user", userId}, {"type", "follow"}};
-			return _restTemplate.PostForMessageAsync("follow", request);
+			var request = new NameValueCollection { { "user", userId }, { "action", "follow" } };
+			return _restTemplate.PostForMessageAsync("user/follow", request);
 		}
 
-		public Task<HttpResponseMessage> UnFollowAsync(string userId)
+		public Task<HttpResponseMessage> StopFollowingAsync(string userId)
 		{
 			EnsureIsAuthorized();
 			var request = new NameValueCollection {{"user", userId}};
-			return _restTemplate.PostForMessageAsync("follow", request);
+			return _restTemplate.PostForMessageAsync("user/follow", request);
 		}
 
 		#endregion

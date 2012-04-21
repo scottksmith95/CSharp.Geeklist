@@ -19,24 +19,21 @@
 #endregion
 
 using System;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist user's avatar information.
+	/// Represents a Geeklist avatar.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Avatar
 	{
-		/// <summary>
-		/// Gets or sets the avatar's small link. ("small")
-		/// </summary>
-		public string SmallLink { get; set; }
+		[JsonProperty("small")]
+		public string Small { get; set; }
 
-		/// <summary>
-		/// Gets or sets the avatar's large link. ("large")
-		/// </summary>
-		public string LargeLink { get; set; }
+		[JsonProperty("large")]
+		public string Large { get; set; }
 	}
 }

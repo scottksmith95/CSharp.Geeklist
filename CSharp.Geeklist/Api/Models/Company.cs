@@ -19,24 +19,21 @@
 #endregion
 
 using System;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist user's company information.
+	/// Represents a Geeklist company.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Company
 	{
-		/// <summary>
-		/// Gets or sets the company's title. ("title")
-		/// </summary>
-		public string Title { get; set; }
-
-		/// <summary>
-		/// Gets or sets the comapay's name. ("name")
-		/// </summary>
+		[JsonProperty("name")]
 		public string Name { get; set; }
+
+		[JsonProperty("title")]
+		public string Title { get; set; }
 	}
 }

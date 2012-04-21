@@ -24,39 +24,37 @@ using CSharp.Geeklist.Api.Models;
 namespace CSharp.Geeklist.Api.Interfaces
 {
 	/// <summary>
-	/// Interface defining the operations for searching Geeklist and retrieving micro data.
+	/// Interface defining the operations for Geeklist micro data.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	public interface IMicroOperations
 	{
 		/// <summary>
-		/// Retrieves the first 10 micros of the authenticating user.
+		/// Retrieves the first 10 micros of the authenticated user.
 		/// </summary>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the authenticating user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		MicroContainer GetUserMicros();
+		MicrosResponse GetUserMicros();
 
 		/// <summary>
-		/// Retrieves micros of the authenticating user.
+		/// Retrieves micros of the authenticated user.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Micro"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="MicroResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the authenticating user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		MicroContainer GetUserMicros(int page, int count);
+		MicrosResponse GetUserMicros(int page, int count);
 
 		/// <summary>
 		/// Retrieves the first 10 micros of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose micros are being requested.</param>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the specified user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		MicroContainer GetUserMicros(string screenName);
+		MicrosResponse GetUserMicros(string screenName);
 
 		/// <summary>
 		/// Retrieves micros of the given user.
@@ -64,69 +62,65 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <param name="screenName">The screen name of the user whose micros are being requested.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Micro"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="MicroResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the specified user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		MicroContainer GetUserMicros(string screenName, int page, int count);
+		MicrosResponse GetUserMicros(string screenName, int page, int count);
 
 		/// <summary>
 		/// Retrieves the micro with the given micro id.
 		/// </summary>
 		/// <param name="microId">The id of the micro whose data is being requested.</param>
-		/// <returns>A <see cref="Micro"/> with the specified id.</returns>
+		/// <returns>A <see cref="MicroResponse"/> with the specified id.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Micro GetMicro(string microId);
+		MicroResponse GetMicro(string microId);
 
 		/// <summary>
-		/// Creates a new micro for the authenticating user
+		/// Creates a new micro for the authenticated user
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
-		/// <returns>The created <see cref="Micro"/>.</returns>
+		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Micro CreateMicro(string status);
+		MicroResponse CreateMicro(string status);
 
 		/// <summary>
-		/// Creates a new micro for the authenticating user
+		/// Creates a new micro for the authenticated user
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
 		/// <param name="type">The type of item being replied to. Can be card or micro.</param>
-		/// <param name="inReplyToId">The id of the card or micro being replied to.</param>
-		/// <returns>The created <see cref="Micro"/>.</returns>
+		/// <param name="itemId">The id of the card or micro being replied to.</param>
+		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Micro CreateMicro(string status, string type, string inReplyToId);
+		MicroResponse CreateMicro(string status, string type, string itemId);
 
 		/// <summary>
-		/// Asynchronously retrieves the first 10 micros of the authenticating user.
+		/// Asynchronously retrieves the first 10 micros of the authenticated user.
 		/// </summary>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the authenticating user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<MicroContainer> GetUserMicrosAsync();
+		Task<MicrosResponse> GetUserMicrosAsync();
 
 		/// <summary>
-		/// Asynchronously retrieves micros of the authenticating user.
+		/// Asynchronously retrieves micros of the authenticated user.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Micro"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="MicroResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the authenticating user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<MicroContainer> GetUserMicrosAsync(int page, int count);
+		Task<MicrosResponse> GetUserMicrosAsync(int page, int count);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 micros of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose micros are being requested.</param>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the specified user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<MicroContainer> GetUserMicrosAsync(string screenName);
+		Task<MicrosResponse> GetUserMicrosAsync(string screenName);
 
 		/// <summary>
 		/// Asynchronously retrieves micros of the given user.
@@ -134,39 +128,37 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <param name="screenName">The screen name of the user whose micros are being requested.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Micro"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="MicroResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="MicroContainer"/> with micros of the specified user.</returns>
+		/// <returns>A <see cref="MicrosResponse"/> with micros of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<MicroContainer> GetUserMicrosAsync(string screenName, int page, int count);
+		Task<MicrosResponse> GetUserMicrosAsync(string screenName, int page, int count);
 
 		/// <summary>
 		/// Asynchronously retrieves the micro with the given micro id.
 		/// </summary>
 		/// <param name="microId">The id of the micro whose data is being requested.</param>
-		/// <returns>A <see cref="Micro"/> with the specified id.</returns>
+		/// <returns>A <see cref="MicroResponse"/> with the specified id.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<Micro> GetMicroAsync(string microId);
+		Task<MicroResponse> GetMicroAsync(string microId);
 
 		/// <summary>
-		/// Asynchronously creates a new micro for the authenticating user
+		/// Asynchronously creates a new micro for the authenticated user
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
-		/// <returns>The created <see cref="Micro"/>.</returns>
+		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<Micro> CreateMicroAsync(string status);
+		Task<MicroResponse> CreateMicroAsync(string status);
 
 		/// <summary>
-		/// Asynchronously creates a new micro for the authenticating user
+		/// Asynchronously creates a new micro for the authenticated user
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
 		/// <param name="type">The type of item being replied to. Can be card or micro.</param>
-		/// <param name="inReplyToId">The id of the card or micro being replied to.</param>
-		/// <returns>The created <see cref="Micro"/>.</returns>
+		/// <param name="itemId">The id of the card or micro being replied to.</param>
+		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<Micro> CreateMicroAsync(string status, string type, string inReplyToId);
+		Task<MicroResponse> CreateMicroAsync(string status, string type, string itemId);
 	}
 }

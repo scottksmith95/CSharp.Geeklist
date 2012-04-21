@@ -18,69 +18,23 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
 using CSharp.Geeklist.Api.Models;
+using Newtonsoft.Json;
 using Spring.Json;
 
 namespace CSharp.Geeklist.Api.Impl.Json
 {
 	/// <summary>
-	/// JSON deserializer for list of activity. 
+	/// JSON deserializer for activities.
 	/// </summary>
 	/// <author>Scott Smith</author>
-	class ActivityListDeserializer : IJsonDeserializer
+	class ActivitiesDeserializer : IJsonDeserializer
 	{
 		public object Deserialize(JsonValue value, JsonMapper mapper)
 		{
-			value = value.GetValue("data");
-
-			IList<Activity> activities = new List<Activity>();
-			foreach (var itemValue in value.GetValues())
-			{
-				activities.Add(mapper.Deserialize<Activity>(itemValue));
-			}
-			return activities;
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist activity.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class ActivityDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new Activity
-			{
-				User = mapper.Deserialize<ShallowUser>(value.GetValue("user")),
-				Gfk = mapper.Deserialize<Gfk>(value.GetValue("gfk")),
-				Created = value.GetValue<DateTime>("created_at"),
-				Updated = value.GetValue<DateTime>("updated_at"),
-				Type = value.GetValue<string>("type"),
-				Id = value.GetValue<string>("id"),
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist gfk.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class GfkDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new Gfk
-			{
-				Mentions = value.GetValue<List<string>>("mentions"),
-				Hashtags = value.GetValue<List<string>>("hashtags"),
-				Details = value.GetValue<List<string>>("details"),
-				Avatar = mapper.Deserialize<Avatar>(value.GetValue("avatar")),
-				Id = value.GetValue<string>("id"),
-				ScreenName = value.GetValue<string>("screen_name"),
-			};
+			var deserializedObject = JsonConvert.DeserializeObject<ActivitiesResponse>(value.ToString());
+			deserializedObject.RawJson = value.ToString();
+			return deserializedObject;
 		}
 	}
 }

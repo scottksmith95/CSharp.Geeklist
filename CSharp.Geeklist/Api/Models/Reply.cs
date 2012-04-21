@@ -19,24 +19,39 @@
 #endregion
 
 using System;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist user's reply information.
+	/// Represents a Geeklist short code.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Reply
 	{
-		/// <summary>
-		/// Gets or sets the reply's thread. ("thread")
-		/// </summary>
-		public Thread Thread { get; set; }
-
-		/// <summary>
-		/// Gets or sets the reply's InReplyTo. ("in_reply_to")
-		/// </summary>
+		[JsonProperty("in_reply_to")]
 		public InReplyTo InReplyTo { get; set; }
+
+		[JsonProperty("thread")]
+		public InReplyTo Thread { get; set; }
+	}
+
+	public class InReplyTo
+	{
+		[JsonProperty("id")]
+		public string Id { get; set; }
+
+		[JsonProperty("status")]
+		public string Status { get; set; }
+
+		[JsonProperty("permalink")]
+		public string Permalink { get; set; }
+
+		[JsonProperty("type")]
+		public string Type { get; set; }
+
+		[JsonProperty("is_active")]
+		public bool IsActive { get; set; }
 	}
 }

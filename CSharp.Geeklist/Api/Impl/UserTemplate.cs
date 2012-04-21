@@ -41,26 +41,26 @@ namespace CSharp.Geeklist.Api.Impl
 
         #region IUserOperations Members
 
-		public User GetUser() 
+		public UserResponse GetUser() 
         {
 		    EnsureIsAuthorized();
-			return _restTemplate.GetForObject<User>("v1/user");
+			return _restTemplate.GetForObject<UserResponse>("user");
 	    }
 
-	    public User GetUser(string screenName) 
+	    public UserResponse GetUser(string screenName) 
         {
-			return _restTemplate.GetForObject<User>("v1/users/" + screenName);
+			return _restTemplate.GetForObject<UserResponse>("users/" + screenName);
 	    }
 
-		public Task<User> GetUserAsync()
+		public Task<UserResponse> GetUserAsync()
 		{
 			EnsureIsAuthorized();
-			return _restTemplate.GetForObjectAsync<User>("v1/user");
+			return _restTemplate.GetForObjectAsync<UserResponse>("user");
 		}
 
-		public Task<User> GetUserAsync(string screenName)
+		public Task<UserResponse> GetUserAsync(string screenName)
 		{
-			return _restTemplate.GetForObjectAsync<User>("v1/users/" + screenName);
+			return _restTemplate.GetForObjectAsync<UserResponse>("users/" + screenName);
 		}
 
         #endregion

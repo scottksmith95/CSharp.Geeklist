@@ -42,74 +42,74 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region ICardOperations Members
 
-		public CardContainer GetUserCards()
+		public CardsResponse GetUserCards()
 		{
 			return GetUserCards(1, 10);
 		}
 
-		public CardContainer GetUserCards(int page, int count)
+		public CardsResponse GetUserCards(int page, int count)
 		{
 			EnsureIsAuthorized();
-            NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<CardContainer>(BuildUrl("user/cards", parameters));
+            var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<CardsResponse>(BuildUrl("user/cards", parameters));
 		}
 
-		public CardContainer GetUserCards(string screenName)
+		public CardsResponse GetUserCards(string screenName)
 		{
 			return GetUserCards(screenName, 1, 10);
 		}
 
-		public CardContainer GetUserCards(string screenName, int page, int count)
+		public CardsResponse GetUserCards(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<CardContainer>(BuildUrl("users/" + screenName + "/cards", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<CardsResponse>(BuildUrl("users/" + screenName + "/cards", parameters));
 		}
 
-		public Card GetCard(string cardId)
+		public CardResponse GetCard(string cardId)
 		{
-			return _restTemplate.GetForObject<Card>("cards/" + cardId);
+			return _restTemplate.GetForObject<CardResponse>("cards/" + cardId);
 		}
 
-		public Card CreateCard(string headline)
+		public CardResponse CreateCard(string headline)
 		{
 			EnsureIsAuthorized();
 			var request = new NameValueCollection {{"headline", headline}};
-			return _restTemplate.PostForObject<Card>("cards", request);
+			return _restTemplate.PostForObject<CardResponse>("cards", request);
 		}
 
-		public Task<CardContainer> GetUserCardsAsync()
+		public Task<CardsResponse> GetUserCardsAsync()
 		{
 			return GetUserCardsAsync(1, 10);
 		}
 
-		public Task<CardContainer> GetUserCardsAsync(int page, int count)
+		public Task<CardsResponse> GetUserCardsAsync(int page, int count)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<CardContainer>(BuildUrl("user/cards", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<CardsResponse>(BuildUrl("user/cards", parameters));
 		}
 
-		public Task<CardContainer> GetUserCardsAsync(string screenName)
+		public Task<CardsResponse> GetUserCardsAsync(string screenName)
 		{
 			return GetUserCardsAsync(screenName, 1, 10);
 		}
 
-		public Task<CardContainer> GetUserCardsAsync(string screenName, int page, int count)
+		public Task<CardsResponse> GetUserCardsAsync(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<CardContainer>(BuildUrl("users/" + screenName + "/cards", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<CardsResponse>(BuildUrl("users/" + screenName + "/cards", parameters));
 		}
 
-		public Task<Card> GetCardAsync(string cardId)
+		public Task<CardResponse> GetCardAsync(string cardId)
 		{
-			return _restTemplate.GetForObjectAsync<Card>("cards/" + cardId);
+			return _restTemplate.GetForObjectAsync<CardResponse>("cards/" + cardId);
 		}
 
-		public Task<Card> CreateCardAsync(string headline)
+		public Task<CardResponse> CreateCardAsync(string headline)
 		{
 			EnsureIsAuthorized();
 			var request = new NameValueCollection {{"headline", headline}};
-			return _restTemplate.PostForObjectAsync<Card>("cards", request);
+			return _restTemplate.PostForObjectAsync<CardResponse>("cards", request);
 		}
 
 		#endregion

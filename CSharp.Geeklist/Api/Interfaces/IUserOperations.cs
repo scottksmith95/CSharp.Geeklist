@@ -24,7 +24,7 @@ using CSharp.Geeklist.Api.Models;
 namespace CSharp.Geeklist.Api.Interfaces
 {
     /// <summary>
-    /// Interface defining the operations for searching Geeklist and retrieving user data.
+	/// Interface defining the operations for Geeklist user data.
     /// </summary>
     /// <author>Scott Smith</author>
     public interface IUserOperations
@@ -32,33 +32,31 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <summary>
         /// Retrieves the authenticated user's Geeklist profile details.
 	    /// </summary>
-        /// <returns>A <see cref="User"/>object representing the user's profile.</returns>
+        /// <returns>A <see cref="UserResponse"/> object representing the user's profile.</returns>
         /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-        /// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-	    User GetUser();
+	    UserResponse GetUser();
 
         /// <summary>
         /// Retrieves a specific user's Geeklist profile details. 
         /// </summary>
         /// <param name="screenName">The screen name for the user whose details are to be retrieved.</param>
-        /// <returns>A <see cref="User"/> object representing the user's profile.</returns>
+        /// <returns>A <see cref="UserResponse"/> object representing the user's profile.</returns>
         /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-	    User GetUser(string screenName);
+	    UserResponse GetUser(string screenName);
 
 		/// <summary>
 		/// Asynchronously retrieves the authenticated user's Geeklist profile details.
 		/// </summary>
-		/// <returns>A <see cref="User"/>object representing the user's profile.</returns>
+		/// <returns>A <see cref="UserResponse"/> object representing the user's profile.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<User> GetUserAsync();
+		Task<UserResponse> GetUserAsync();
 
 		/// <summary>
 		/// Asynchronously retrieves a specific user's Geeklist profile details. 
 		/// </summary>
 		/// <param name="screenName">The screen name for the user whose details are to be retrieved.</param>
-		/// <returns>A <see cref="User"/> object representing the user's profile.</returns>
+		/// <returns>A <see cref="UserResponse"/> object representing the user's profile.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<User> GetUserAsync(string screenName);
+		Task<UserResponse> GetUserAsync(string screenName);
     }
 }

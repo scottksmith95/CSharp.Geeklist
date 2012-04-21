@@ -18,8 +18,8 @@
 
 #endregion
 
-using System.Collections.Generic;
 using System.Collections.Specialized;
+using CSharp.Geeklist.Api.Enums;
 using CSharp.Geeklist.Api.Interfaces;
 using CSharp.Geeklist.Api.Models;
 using Spring.Rest.Client;
@@ -43,72 +43,78 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region IActivityOperations Members
 
-		public IList<Activity> GetUserActivities()
+		public ActivitiesResponse GetUserActivities(ActivityType type)
 		{
-			return GetUserActivities(1, 10);
+			return GetUserActivities(1, 10, type);
 		}
 
-		public IList<Activity> GetUserActivities(int page, int count)
+		public ActivitiesResponse GetUserActivities(int page, int count, ActivityType type)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<IList<Activity>>(BuildUrl("user/activity", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			return _restTemplate.GetForObject<ActivitiesResponse>(BuildUrl("user/activity", parameters));
 		}
 
-		public IList<Activity> GetUserActivities(string screenName)
+		public ActivitiesResponse GetUserActivities(string screenName, ActivityType type)
 		{
-			return GetUserActivities(screenName, 1, 10);
+			return GetUserActivities(screenName, 1, 10, type);
 		}
 
-		public IList<Activity> GetUserActivities(string screenName, int page, int count)
+		public ActivitiesResponse GetUserActivities(string screenName, int page, int count, ActivityType type)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<IList<Activity>>(BuildUrl("users/" + screenName + "/activity", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			return _restTemplate.GetForObject<ActivitiesResponse>(BuildUrl("users/" + screenName + "/activity", parameters));
 		}
 
-		public IList<Activity> GetAllActivities()
+		public ActivitiesResponse GetAllActivities(ActivityType type)
 		{
-			return GetAllActivities(1, 10);
+			return GetAllActivities(1, 10, type);
 		}
 
-		public IList<Activity> GetAllActivities(int page, int count)
+		public ActivitiesResponse GetAllActivities(int page, int count, ActivityType type)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<IList<Activity>>(BuildUrl("activity", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			return _restTemplate.GetForObject<ActivitiesResponse>(BuildUrl("activity", parameters));
 		}
 
-		public Task<IList<Activity>> GetUserActivitiesAsync()
+		public Task<ActivitiesResponse> GetUserActivitiesAsync(ActivityType type)
 		{
-			return GetUserActivitiesAsync(1, 10);
+			return GetUserActivitiesAsync(1, 10, type);
 		}
 
-		public Task<IList<Activity>> GetUserActivitiesAsync(int page, int count)
+		public Task<ActivitiesResponse> GetUserActivitiesAsync(int page, int count, ActivityType type)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<IList<Activity>>(BuildUrl("user/activity", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			return _restTemplate.GetForObjectAsync<ActivitiesResponse>(BuildUrl("user/activity", parameters));
 		}
 
-		public Task<IList<Activity>> GetUserActivitiesAsync(string screenName)
+		public Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, ActivityType type)
 		{
-			return GetUserActivitiesAsync(screenName, 1, 10);
+			return GetUserActivitiesAsync(screenName, 1, 10, type);
 		}
 
-		public Task<IList<Activity>> GetUserActivitiesAsync(string screenName, int page, int count)
+		public Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, int page, int count, ActivityType type)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<IList<Activity>>(BuildUrl("users/" + screenName + "/activity", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			return _restTemplate.GetForObjectAsync<ActivitiesResponse>(BuildUrl("users/" + screenName + "/activity", parameters));
 		}
 
-		public Task<IList<Activity>> GetAllActivitiesAsync()
+		public Task<ActivitiesResponse> GetAllActivitiesAsync(ActivityType type)
 		{
-			return GetAllActivitiesAsync(1, 10);
+			return GetAllActivitiesAsync(1, 10, type);
 		}
 
-		public Task<IList<Activity>> GetAllActivitiesAsync(int page, int count)
+		public Task<ActivitiesResponse> GetAllActivitiesAsync(int page, int count, ActivityType type)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<IList<Activity>>(BuildUrl("activity", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			return _restTemplate.GetForObjectAsync<ActivitiesResponse>(BuildUrl("activity", parameters));
 		}
 
 		#endregion

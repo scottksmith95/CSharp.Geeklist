@@ -42,50 +42,50 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region IFollowingOperations Members
 
-		public FollowingContainer GetUserFollowing()
+		public FollowingResponse GetUserFollowing()
 		{
 			return GetUserFollowing(1, 10);
 		}
 
-		public FollowingContainer GetUserFollowing(int page, int count)
+		public FollowingResponse GetUserFollowing(int page, int count)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<FollowingContainer>(BuildUrl("user/following", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<FollowingResponse>(BuildUrl("user/following", parameters));
 		}
 
-		public FollowingContainer GetUserFollowing(string screenName)
+		public FollowingResponse GetUserFollowing(string screenName)
 		{
 			return GetUserFollowing(screenName, 1, 10);
 		}
 
-		public FollowingContainer GetUserFollowing(string screenName, int page, int count)
+		public FollowingResponse GetUserFollowing(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<FollowingContainer>(BuildUrl("users/" + screenName + "/following", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<FollowingResponse>(BuildUrl("users/" + screenName + "/following", parameters));
 		}
 
-		public Task<FollowingContainer> GetUserFollowingAsync()
+		public Task<FollowingResponse> GetUserFollowingAsync()
 		{
 			return GetUserFollowingAsync(1, 10);
 		}
 
-		public Task<FollowingContainer> GetUserFollowingAsync(int page, int count)
+		public Task<FollowingResponse> GetUserFollowingAsync(int page, int count)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<FollowingContainer>(BuildUrl("user/following", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<FollowingResponse>(BuildUrl("user/following", parameters));
 		}
 
-		public Task<FollowingContainer> GetUserFollowingAsync(string screenName)
+		public Task<FollowingResponse> GetUserFollowingAsync(string screenName)
 		{
 			return GetUserFollowingAsync(screenName, 1, 10);
 		}
 
-		public Task<FollowingContainer> GetUserFollowingAsync(string screenName, int page, int count)
+		public Task<FollowingResponse> GetUserFollowingAsync(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<FollowingContainer>(BuildUrl("users/" + screenName + "/following", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<FollowingResponse>(BuildUrl("users/" + screenName + "/following", parameters));
 		}
 
 		#endregion

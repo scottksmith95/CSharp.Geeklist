@@ -19,29 +19,24 @@
 #endregion
 
 using System;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist user's social information.
+	/// Represents a Geeklist social.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Social
 	{
-		/// <summary>
-		/// Gets or sets the social's twitter screen namne. ("twitter_screen_name")
-		/// </summary>
+		[JsonProperty("twitter_followers_count")]
+		public int TwitterFollowersCount { get; set; }
+
+		[JsonProperty("twitter_friends_count")]
+		public int TwitterFriendsCount { get; set; }
+
+		[JsonProperty("twitter_screen_name")]
 		public string TwitterScreenName { get; set; }
-
-		/// <summary>
-		/// Gets or sets the social's twitter friend count. ("twitter_friends_count")
-		/// </summary>
-		public long TwitterFriends { get; set; }
-
-		/// <summary>
-		/// Gets or sets the social's twitter follower count. ("twitter_followers_count")
-		/// </summary>
-		public long TwitterFollowers { get; set; }
 	}
 }

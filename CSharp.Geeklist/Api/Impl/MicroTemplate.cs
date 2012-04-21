@@ -42,88 +42,88 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region IMicroOperations Members
 
-		public MicroContainer GetUserMicros()
+		public MicrosResponse GetUserMicros()
 		{
 			return GetUserMicros(1, 10);
 		}
 
-		public MicroContainer GetUserMicros(int page, int count)
+		public MicrosResponse GetUserMicros(int page, int count)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<MicroContainer>(BuildUrl("user/micros", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<MicrosResponse>(BuildUrl("user/micros", parameters));
 		}
 
-		public MicroContainer GetUserMicros(string screenName)
+		public MicrosResponse GetUserMicros(string screenName)
 		{
 			return GetUserMicros(screenName, 1, 10);
 		}
 
-		public MicroContainer GetUserMicros(string screenName, int page, int count)
+		public MicrosResponse GetUserMicros(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObject<MicroContainer>(BuildUrl("users/" + screenName + "/micros", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObject<MicrosResponse>(BuildUrl("users/" + screenName + "/micros", parameters));
 		}
 
-		public Micro GetMicro(string microId)
+		public MicroResponse GetMicro(string microId)
 		{
-			return _restTemplate.GetForObject<Micro>("micros/" + microId);
+			return _restTemplate.GetForObject<MicroResponse>("micros/" + microId);
 		}
 
-		public Micro CreateMicro(string status)
+		public MicroResponse CreateMicro(string status)
 		{
 			EnsureIsAuthorized();
 			var request = new NameValueCollection {{"status", status}};
-			return _restTemplate.PostForObject<Micro>("micros", request);
+			return _restTemplate.PostForObject<MicroResponse>("micros", request);
 		}
 
-		public Micro CreateMicro(string status, string type, string inReplyToId)
+		public MicroResponse CreateMicro(string status, string type, string itemId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection {{"status", status}, {"type", type}, {"in_reply_to", inReplyToId}};
-			return _restTemplate.PostForObject<Micro>("micros", request);
+			var request = new NameValueCollection { { "status", status }, { "type", type }, { "in_reply_to", itemId } };
+			return _restTemplate.PostForObject<MicroResponse>("micros", request);
 		}
 
-		public Task<MicroContainer> GetUserMicrosAsync()
+		public Task<MicrosResponse> GetUserMicrosAsync()
 		{
 			return GetUserMicrosAsync(1, 10);
 		}
 
-		public Task<MicroContainer> GetUserMicrosAsync(int page, int count)
+		public Task<MicrosResponse> GetUserMicrosAsync(int page, int count)
 		{
 			EnsureIsAuthorized();
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<MicroContainer>(BuildUrl("user/micros", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<MicrosResponse>(BuildUrl("user/micros", parameters));
 		}
 
-		public Task<MicroContainer> GetUserMicrosAsync(string screenName)
+		public Task<MicrosResponse> GetUserMicrosAsync(string screenName)
 		{
 			return GetUserMicrosAsync(screenName, 1, 10);
 		}
 
-		public Task<MicroContainer> GetUserMicrosAsync(string screenName, int page, int count)
+		public Task<MicrosResponse> GetUserMicrosAsync(string screenName, int page, int count)
 		{
-			NameValueCollection parameters = BuildPagingParametersWithCount(page, count);
-			return _restTemplate.GetForObjectAsync<MicroContainer>(BuildUrl("users/" + screenName + "/micros", parameters));
+			var parameters = BuildPagingParametersWithCount(page, count);
+			return _restTemplate.GetForObjectAsync<MicrosResponse>(BuildUrl("users/" + screenName + "/micros", parameters));
 		}
 
-		public Task<Micro> GetMicroAsync(string microId)
+		public Task<MicroResponse> GetMicroAsync(string microId)
 		{
-			return _restTemplate.GetForObjectAsync<Micro>("micros/" + microId);
+			return _restTemplate.GetForObjectAsync<MicroResponse>("micros/" + microId);
 		}
 
-		public Task<Micro> CreateMicroAsync(string status)
+		public Task<MicroResponse> CreateMicroAsync(string status)
 		{
 			EnsureIsAuthorized();
 			var request = new NameValueCollection {{"status", status}};
-			return _restTemplate.PostForObjectAsync<Micro>("micros", request);
+			return _restTemplate.PostForObjectAsync<MicroResponse>("micros", request);
 		}
 
-		public Task<Micro> CreateMicroAsync(string status, string type, string inReplyToId)
+		public Task<MicroResponse> CreateMicroAsync(string status, string type, string itemId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection {{"status", status}, {"type", type}, {"in_reply_to", inReplyToId}};
-			return _restTemplate.PostForObjectAsync<Micro>("micros", request);
+			var request = new NameValueCollection { { "status", status }, { "type", type }, { "in_reply_to", itemId } };
+			return _restTemplate.PostForObjectAsync<MicroResponse>("micros", request);
 		}
 
 		#endregion

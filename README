@@ -1,14 +1,18 @@
-** NOTE
-** This API wrapper has not been tested. I have not received an
-** API access key. It has been built using the specifications 
-** for this API. When I do receive an access key, I will update 
-** the project.
-
 CSharp.Geeklist is a C# .NET wrapper for the Geeklist RESTful API.
 
 It contains the following
 
   * OAuth connection support for Geeklist
   * API binding for Geeklist
+  * ASP.NET MVC 3 example project
+  * Console application example project
+
+Things to keep in mind
+
+  * The Geeklist API is beta and under active development.
+  * I will do my best to keep up with changes.
+  * Please create issues if you find anything not working.
+  * The wrapper currently points to the sandbox for development and testing.
+  * Jason Chapel has informed me Activities will recieve a major overhaul.
 
 API documentation can be found here: http://hackers.geekli.st/

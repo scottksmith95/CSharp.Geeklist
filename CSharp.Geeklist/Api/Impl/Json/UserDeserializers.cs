@@ -18,127 +18,23 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
 using CSharp.Geeklist.Api.Models;
+using Newtonsoft.Json;
 using Spring.Json;
 
 namespace CSharp.Geeklist.Api.Impl.Json
 {
     /// <summary>
-    /// JSON deserializer for Geeklist user.
+    /// JSON deserializer for a user.
     /// </summary>
     /// <author>Scott Smith</author>
     class UserDeserializer : IJsonDeserializer
     {
         public object Deserialize(JsonValue value, JsonMapper mapper)
         {
-			value = value.GetValue("data");
-
-            return new User
-            {
-                Id = value.GetValue<string>("id"),
-                Name = value.GetValue<string>("name"),
-				ScreenName = value.GetValue<string>("screen_name"),
-				Avatar = mapper.Deserialize<Avatar>(value.GetValue("avatar")),
-				BlogLink = value.GetValue<string>("blog_link"),
-				Company = mapper.Deserialize<Company>(value.GetValue("company")),
-				Location = value.GetValue<string>("location"),
-				Bio = value.GetValue<string>("bio"),
-				SocialLinks = value.GetValue<List<string>>("social_links"),
-				Criteria = mapper.Deserialize<Criteria>(value.GetValue("criteria")),
-				Stats = mapper.Deserialize<UserStats>(value.GetValue("stats")),
-				Beta = value.GetValue<bool>("is_beta"),
-				Created = value.GetValue<DateTime>("created_at"),
-				Updated = value.GetValue<DateTime>("updated_at"),
-				Active = value.GetValue<DateTime>("active_at"),
-				Trending = value.GetValue<DateTime>("trending_at"),
-				TrendingHistory = value.GetValue<List<string>>("trending_hist"),
-            };
+			var deserializedObject = JsonConvert.DeserializeObject<UserResponse>(value.ToString());
+			deserializedObject.RawJson = value.ToString();
+			return deserializedObject;
         }
     }
-
-	/// <summary>
-    /// JSON deserializer for Geeklist user avatar.
-    /// </summary>
-    /// <author>Scott Smith</author>
-	class AvatarDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new Avatar
-			{
-				SmallLink = value.GetValue<string>("small"),
-				LargeLink = value.GetValue<string>("large"),
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist user company.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class CompanyDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new Company
-			{
-				Title = value.GetValue<string>("title"),
-				Name = value.GetValue<string>("name"),
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist user social.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class SocialDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new Social
-			{
-				TwitterScreenName = value.GetValue<string>("twitter_screen_name"),
-				TwitterFriends = value.GetValue<long>("twitter_friends_count"),
-				TwitterFollowers = value.GetValue<long>("twitter_followers_count"),
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist user criteria.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class CriteriaDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new Criteria
-			{
-				LookingFor = value.GetValue<List<string>>("looking_for"),
-				AvailabeFor = value.GetValue<List<string>>("available_for"),
-			};
-		}
-	}
-
-	/// <summary>
-	/// JSON deserializer for Geeklist user stats.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	class UserStatsDeserializer : IJsonDeserializer
-	{
-		public object Deserialize(JsonValue value, JsonMapper mapper)
-		{
-			return new UserStats
-			{
-				Contributions = value.GetValue<long>("number_of_contributions"),
-				HighFives = value.GetValue<long>("number_of_highfives"),
-				Mentions = value.GetValue<long>("number_of_mentions"),
-				Cards = value.GetValue<long>("number_of_cards"),
-				Pings = value.GetValue<long>("number_of_pings"),
-			};
-		}
-	}
 }

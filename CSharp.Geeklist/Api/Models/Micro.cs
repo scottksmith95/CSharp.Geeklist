@@ -20,74 +20,75 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist micro's information.
+	/// Represents a Geeklist micro.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Micro
 	{
-		/// <summary>
-		/// Gets or sets the micro's created date. ("created_at")
-		/// </summary>
-		public DateTime Created { get; set; }
+		[JsonProperty("type")]
+		public string Type { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's permanent link. ("permalink")
-		/// </summary>
-		public string Permalink { get; set; }
-
-		/// <summary>
-		/// Gets or sets the micro's slug. ("slug")
-		/// </summary>
-		public string Slug { get; set; }
-
-		/// <summary>
-		/// Gets or sets the micro's status. ("slug")
-		/// </summary>
+		[JsonProperty("status")]
 		public string Status { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's last updated date. ("updated_at")
-		/// </summary>
-		public DateTime Updated { get; set; }
+		[JsonProperty("slug")]
+		public string Slug { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's mentions. ("mentions")
-		/// </summary>
-		public List<string> Mentions { get; set; }
+		[JsonProperty("permalink")]
+		public string Permalink { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's reply. ("reply")
-		/// </summary>
+		[JsonProperty("trending_hist")]
+		public List<TrendingHistory> TrendingHist { get; set; }
+
+		[JsonProperty("trending_at")]
+		public string TrendingAt { get; set; }
+
+		[JsonProperty("updated_at")]
+		public string UpdatedAt { get; set; }
+
+		[JsonProperty("created_at")]
+		public string CreatedAt { get; set; }
+
+		[JsonProperty("is_active")]
+		public bool IsActive { get; set; }
+
+		[JsonProperty("is_trending")]
+		public bool IsTrending { get; set; }
+
+		[JsonProperty("hashtags")]
+		public List<object> Hashtags { get; set; }		//TODO: Need to support this more directly
+
+		[JsonProperty("mentions")]
+		public List<object> Mentions { get; set; }		//TODO: Need to support this more directly
+
+		[JsonProperty("via_app")]
+		public ViaApp ViaApp { get; set; }
+
+		[JsonProperty("reply")]
 		public Reply Reply { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's short code. ("shrt_code")
-		/// </summary>
+		[JsonProperty("stats")]
+		public Stats Stats { get; set; }
+
+		[JsonProperty("short_code")]
 		public ShortCode ShortCode { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's shallow user. ("user")
-		/// </summary>
+		[JsonProperty("user")]
 		public ShallowUser User { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's id. ("id")
-		/// </summary>
+		[JsonProperty("id")]
 		public string Id { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's high fived state. ("has_highfived")
-		/// </summary>
-		public bool HasHighFived { get; set; }
+		[JsonProperty("has_highfived")]
+		public bool HasHighfived { get; set; }
 
-		/// <summary>
-		/// Gets or sets the micro's is author state. ("is_author")
-		/// </summary>
+		[JsonProperty("is_author")]
 		public bool IsAuthor { get; set; }
 	}
 }

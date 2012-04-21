@@ -20,99 +20,95 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist card's information.
+	/// Represents a Geeklist card.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Card
 	{
-		/// <summary>
-		/// Gets or sets the card's author ID. ("author_id")
-		/// </summary>
+		[JsonProperty("author_id")]
 		public string AuthorId { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's created date. ("created_at")
-		/// </summary>
-		public DateTime Created { get; set; }
+		[JsonProperty("created_at")]
+		public string CreatedAt { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's happened date. ("happened_at")
-		/// </summary>
-		public DateTime Happened { get; set; }
-
-		/// <summary>
-		/// Gets or sets the card's happened type. ("happened_at_type")
-		/// </summary>
-		public string HappenedType { get; set; }
-
-		/// <summary>
-		/// Gets or sets the card's headline. ("headline")
-		/// </summary>
+		[JsonProperty("headline")]
 		public string Headline { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's is active flag. ("is_active")
-		/// </summary>
+		[JsonProperty("is_active")]
 		public bool IsActive { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's permanent link. ("permalink")
-		/// </summary>
+		[JsonProperty("is_trending")]
+		public bool IsTrending { get; set; }
+
+		[JsonProperty("permalink")]
 		public string Permalink { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's slug. ("slug")
-		/// </summary>
+		[JsonProperty("skills")]
+		public List<string> Skills { get; set; }
+
+		[JsonProperty("slug")]
 		public string Slug { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's tasks. ("tasks")
-		/// </summary>
+		[JsonProperty("tasks")]
 		public List<string> Tasks { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's last updated date. ("updated_at")
-		/// </summary>
-		public DateTime Updated { get; set; }
+		[JsonProperty("trending_at")]
+		public string TrendingAt { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's stats. ("stats")
-		/// </summary>
-		public CardStats Stats { get; set; }
+		[JsonProperty("trending_by")]
+		public string TrendingBy { get; set; }
 
-		/// <summary>
-		/// Gets or sets the card's short code. ("short_code")
-		/// </summary>
+		[JsonProperty("trending_hist")]
+		public List<TrendingHistory> TrendingHist { get; set; }
+
+		[JsonProperty("updated_at")]
+		public string UpdatedAt { get; set; }
+
+		[JsonProperty("stats")]
+		public Stats Stats { get; set; }
+
+		[JsonProperty("short_code")]
 		public ShortCode ShortCode { get; set; }
 
-		///// <summary>
-		///// Gets or sets the card's ID. ("trending_hist")
-		///// </summary>
-		//public List<string> TrendingHistory { get; set; }
+		[JsonProperty("id")]
+		public string Id { get; set; }
 
-		///// <summary>
-		///// Gets or sets the card's ID. ("trending_at")
-		///// </summary>
-		//public DateTime? TrendingAt { get; set; }
+		[JsonProperty("contributors")]
+		public List<Contributor> Contributors { get; set; }
 
-		///// <summary>
-		///// Gets or sets the card's ID. ("is_trending")
-		///// </summary>
-		//public bool IsTrending { get; set; }
+		[JsonProperty("has_highfived")]
+		public bool HasHighfived { get; set; }
 
-		///// <summary>
-		///// Gets or sets the card's ID. ("skills")
-		///// </summary>
-		//public List<string> Skills { get; set; }
+		[JsonProperty("is_author")]
+		public bool IsAuthor { get; set; }
+	}
 
-		/// <summary>
-		/// Gets or sets the card's ID. ("id")
-		/// </summary>
+	/// <summary>
+	/// Represents a Geeklist card contributor.
+	/// </summary>
+	/// <author>Scott Smith</author>
+	[Serializable]
+	public class Contributor
+	{
+		[JsonProperty("screen_name")]
+		public string ScreenName { get; set; }
+
+		[JsonProperty("screen_name_upper")]
+		public string ScreenNameUpper { get; set; }
+
+		[JsonProperty("avatar")]
+		public Avatar Avatar { get; set; }
+
+		[JsonProperty("social")]
+		public Social Social { get; set; }
+
+		[JsonProperty("id")]
 		public string Id { get; set; }
 	}
 }

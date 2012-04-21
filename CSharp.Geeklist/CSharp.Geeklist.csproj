@@ -34,6 +34,9 @@
     <Reference Include="Common.Logging">
       <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Spring.Rest">
       <HintPath>..\packages\Spring.Rest.1.1.0\lib\net40\Spring.Rest.dll</HintPath>
     </Reference>
@@ -49,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Enums\Activity.cs" />
+    <Compile Include="Api\Enums\Highfive.cs" />
     <Compile Include="Api\GeeklistApiError.cs" />
     <Compile Include="Api\GeeklistApiException.cs" />
     <Compile Include="Api\Impl\AbstractGeeklistOperations.cs" />
@@ -75,26 +80,32 @@
     <Compile Include="Api\Interfaces\IHighfiveOperations.cs" />
     <Compile Include="Api\Interfaces\IMicroOperations.cs" />
     <Compile Include="Api\Interfaces\IUserOperations.cs" />
+    <Compile Include="Api\Models\ActivitiesResponse.cs" />
     <Compile Include="Api\Models\Activity.cs" />
     <Compile Include="Api\Models\Avatar.cs" />
     <Compile Include="Api\Models\Card.cs" />
-    <Compile Include="Api\Models\CardContainer.cs" />
-    <Compile Include="Api\Models\CardStats.cs" />
+    <Compile Include="Api\Models\CardDetails.cs" />
+    <Compile Include="Api\Models\CardResponse.cs" />
+    <Compile Include="Api\Models\CardsResponse.cs" />
     <Compile Include="Api\Models\Company.cs" />
     <Compile Include="Api\Models\Criteria.cs" />
-    <Compile Include="Api\Models\Follower.cs" />
-    <Compile Include="Api\Models\Following.cs" />
-    <Compile Include="Api\Models\Gfk.cs" />
-    <Compile Include="Api\Models\InReplyTo.cs" />
+    <Compile Include="Api\Models\FollowersDetails.cs" />
+    <Compile Include="Api\Models\FollowersResponse.cs" />
+    <Compile Include="Api\Models\FollowingDetails.cs" />
+    <Compile Include="Api\Models\FollowingResponse.cs" />
     <Compile Include="Api\Models\Micro.cs" />
-    <Compile Include="Api\Models\MicroContainer.cs" />
+    <Compile Include="Api\Models\MicroResponse.cs" />
+    <Compile Include="Api\Models\MicrosDetails.cs" />
+    <Compile Include="Api\Models\MicrosResponse.cs" />
     <Compile Include="Api\Models\Reply.cs" />
     <Compile Include="Api\Models\ShallowUser.cs" />
     <Compile Include="Api\Models\ShortCode.cs" />
     <Compile Include="Api\Models\Social.cs" />
-    <Compile Include="Api\Models\Thread.cs" />
+    <Compile Include="Api\Models\Stats.cs" />
+    <Compile Include="Api\Models\TrendingHistory.cs" />
     <Compile Include="Api\Models\User.cs" />
-    <Compile Include="Api\Models\UserStats.cs" />
+    <Compile Include="Api\Models\UserResponse.cs" />
+    <Compile Include="Api\Models\ViaApp.cs" />
     <Compile Include="Connect\GeeklistServiceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

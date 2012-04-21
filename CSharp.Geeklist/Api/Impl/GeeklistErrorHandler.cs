@@ -20,8 +20,6 @@
 
 using System;
 using System.Net;
-using System.Text;
-using Spring.Json;
 using Spring.Http;
 using Spring.Rest.Client;
 using Spring.Rest.Client.Support;
@@ -35,10 +33,7 @@ namespace CSharp.Geeklist.Api.Impl
     /// <author>Scott Smith</author>
     class GeeklistErrorHandler : DefaultResponseErrorHandler
     {
-        // Default encoding for JSON
-        private static readonly Encoding DefaultCharset = new UTF8Encoding(false); // Remove byte Order Mask (BOM)
-
-        /// <summary>
+    	/// <summary>
         /// Handles the error in the given response. 
         /// <para/>
         /// This method is only called when HasError() method has returned <see langword="true"/>.

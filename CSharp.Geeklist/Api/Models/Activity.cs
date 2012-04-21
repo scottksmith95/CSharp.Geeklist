@@ -19,44 +19,36 @@
 #endregion
 
 using System;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist micro's information.
+	/// Represents a Geeklist activity.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Activity
 	{
-		/// <summary>
-		/// Gets or sets the activity shallow user. ("user")
-		/// </summary>
-		public ShallowUser User { get; set; }
-
-		/// <summary>
-		/// Gets or sets the activity gfk. ("gfk")
-		/// </summary>
-		public Gfk Gfk { get; set; }
-
-		/// <summary>
-		/// Gets or sets activity created date. ("created_at")
-		/// </summary>
-		public DateTime Created { get; set; }
-
-		/// <summary>
-		/// Gets or sets the activity last updated date. ("updated_at")
-		/// </summary>
-		public DateTime Updated { get; set; }
-
-		/// <summary>
-		/// Gets or sets the activity type. ("updated_at")
-		/// </summary>
+		[JsonProperty("type")]
 		public string Type { get; set; }
 
-		/// <summary>
-		/// Gets or sets the activity id. ("id")
-		/// </summary>
+		[JsonProperty("updated_at")]
+		public string UpdatedAt { get; set; }
+
+		[JsonProperty("created_at")]
+		public string CreatedAt { get; set; }
+
+		[JsonProperty("is_active")]
+		public bool IsActive { get; set; }
+
+		[JsonProperty("gfk")]
+		public object Gfk { get; set; }			//TODO: Need to support this more directly
+
+		[JsonProperty("user")]
+		public ShallowUser User { get; set; }
+
+		[JsonProperty("id")]
 		public string Id { get; set; }
 	}
 }

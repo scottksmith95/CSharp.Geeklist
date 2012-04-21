@@ -24,127 +24,121 @@ using CSharp.Geeklist.Api.Models;
 namespace CSharp.Geeklist.Api.Interfaces
 {
 	/// <summary>
-	/// Interface defining the operations for searching Geeklist and retrieving card data.
+	/// Interface defining the operations for Geeklist card data.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	public interface ICardOperations
 	{
 		/// <summary>
-		/// Retrieves the first 10 cards of the authenticating user.
+		/// Retrieves the first 10 cards of the authenticated user.
 		/// </summary>
-		/// <returns>A <see cref="CardContainer"/> with cards of the authenticating user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		CardContainer GetUserCards();
+		CardsResponse GetUserCards();
 
 		/// <summary>
-		/// Retrieves cards posted by the authenticating user.
+		/// Retrieves cards of the authenticated user.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Card"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="CardContainer"/> with cards of the authenticating user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		CardContainer GetUserCards(int page, int count);
+		CardsResponse GetUserCards(int page, int count);
 
 		/// <summary>
 		/// Retrieves the first 10 cards of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose cards are being requested.</param>
-		/// <returns>A <see cref="CardContainer"/> with cards of the specified user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		CardContainer GetUserCards(string screenName);
+		CardsResponse GetUserCards(string screenName);
 
 		/// <summary>
-		/// Retrieves cards posted by the given user.
+		/// Retrieves cards of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose cards are being requested.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Card"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="CardContainer"/> with cards of the specified user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		CardContainer GetUserCards(string screenName, int page, int count);
+		CardsResponse GetUserCards(string screenName, int page, int count);
 
 		/// <summary>
 		/// Retrieves the card with the given card id.
 		/// </summary>
 		/// <param name="cardId">The id of the card whose data is being requested.</param>
-		/// <returns>A <see cref="Card"/> with the specified id.</returns>
+		/// <returns>A <see cref="CardResponse"/> with the specified id.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Card GetCard(string cardId);
+		CardResponse GetCard(string cardId);
 
 		/// <summary>
 		/// Creates a new card
 		/// </summary>
 		/// <param name="headline">The headline for the new card.</param>
-		/// <returns>The created <see cref="Card"/>.</returns>
+		/// <returns>The created <see cref="CardResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Card CreateCard(string headline);
+		CardResponse CreateCard(string headline);
 
 		/// <summary>
-		/// Asynchronously retrieves the first 10 cards of the authenticating user.
+		/// Asynchronously retrieves the first 10 cards of the authenticated user.
 		/// </summary>
-		/// <returns>A <see cref="CardContainer"/> with cards of the authenticating user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<CardContainer> GetUserCardsAsync();
+		Task<CardsResponse> GetUserCardsAsync();
 
 		/// <summary>
-		/// Asynchronously retrieves cards posted by the authenticating user.
+		/// Asynchronously retrieves cards of the authenticated user.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Card"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="CardContainer"/> with cards of the authenticating user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<CardContainer> GetUserCardsAsync(int page, int count);
+		Task<CardsResponse> GetUserCardsAsync(int page, int count);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 cards of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose cards are being requested.</param>
-		/// <returns>A <see cref="CardContainer"/> with cards of the specified user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<CardContainer> GetUserCardsAsync(string screenName);
+		Task<CardsResponse> GetUserCardsAsync(string screenName);
 
 		/// <summary>
-		/// Asynchronously retrieves cards posted by the given user.
+		/// Asynchronously retrieves cards of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose cards are being requested.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Card"/>s per page. Should be less than or equal to 50. 
+		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A <see cref="CardContainer"/> with cards of the specified user.</returns>
+		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<CardContainer> GetUserCardsAsync(string screenName, int page, int count);
+		Task<CardsResponse> GetUserCardsAsync(string screenName, int page, int count);
 
 		/// <summary>
 		/// Asynchronously retrieves the card with the given card id.
 		/// </summary>
 		/// <param name="cardId">The id of the card whose data is being requested.</param>
-		/// <returns>A <see cref="Card"/> with the specified id.</returns>
+		/// <returns>A <see cref="CardResponse"/> with the specified id.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<Card> GetCardAsync(string cardId);
+		Task<CardResponse> GetCardAsync(string cardId);
 
 		/// <summary>
 		/// Asynchronously creates a new card
 		/// </summary>
 		/// <param name="headline">The headline for the new card.</param>
-		/// <returns>The created <see cref="Card"/>.</returns>
+		/// <returns>The created <see cref="CardResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<Card> CreateCardAsync(string headline);
+		Task<CardResponse> CreateCardAsync(string headline);
 	}
 }

@@ -18,138 +18,145 @@
 
 #endregion
 
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using CSharp.Geeklist.Api.Enums;
 using CSharp.Geeklist.Api.Models;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
 	/// <summary>
-	/// Interface defining the operations for searching Geeklist and retrieving activity data.
+	/// Interface defining the operations for Geeklist activity data.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	public interface IActivityOperations
 	{
 		/// <summary>
-		/// Retrieves the first 10 activities of the authenticating user.
+		/// Retrieves the first 10 activities of the authenticated user.
 		/// </summary>
-		/// <returns>A list of <see cref="Activity"/> of the authenticating user.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		IList<Activity> GetUserActivities();
+		ActivitiesResponse GetUserActivities(ActivityType type = ActivityType.All);
 
 		/// <summary>
-		/// Retrieves activities of the authenticating user.
+		/// Retrieves activities of the authenticated user.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Activity"/> per page. Should be less than or equal to 50. 
+		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A list of <see cref="Activity"/> of the authenticating user.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		IList<Activity> GetUserActivities(int page, int count);
+		ActivitiesResponse GetUserActivities(int page, int count, ActivityType type = ActivityType.All);
 
 		/// <summary>
 		/// Retrieves the first 10 activities of the given user.
 		/// </summary>
-		/// <param name="screenName">The screen name of the user whose activity is being requested.</param>
-		/// <returns>A list of <see cref="Activity"/> of the specified user.</returns>
+		/// <param name="screenName">The screen name of the user whose activities are being requested.</param>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		IList<Activity> GetUserActivities(string screenName);
+		ActivitiesResponse GetUserActivities(string screenName, ActivityType type = ActivityType.All);
 
 		/// <summary>
 		/// Retrieves activities of the given user.
 		/// </summary>
-		/// <param name="screenName">The screen name of the user whose activity is being requested.</param>
+		/// <param name="screenName">The screen name of the user whose activities are being requested.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Activity"/> per page. Should be less than or equal to 50. 
+		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A list of <see cref="Activity"/> of the specified user.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		IList<Activity> GetUserActivities(string screenName, int page, int count);
+		ActivitiesResponse GetUserActivities(string screenName, int page, int count, ActivityType type = ActivityType.All);
 
 		/// <summary>
 		/// Retrieves the first 10 activities from all users
 		/// </summary>
-		/// <returns>A list of <see cref="Activity"/> of all users.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		IList<Activity> GetAllActivities();
+		ActivitiesResponse GetAllActivities(ActivityType type = ActivityType.All);
 
 		/// <summary>
 		/// Retrieves activities from all users.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Activity"/> per page. Should be less than or equal to 50. 
+		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A list of <see cref="Activity"/> of all users.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		IList<Activity> GetAllActivities(int page, int count);
+		ActivitiesResponse GetAllActivities(int page, int count, ActivityType type = ActivityType.All);
 
 		/// <summary>
-		/// Asynchronously retrieves the first 10 activities of the authenticating user.
+		/// Asynchronously retrieves the first 10 activities of the authenticated user.
 		/// </summary>
-		/// <returns>A list of <see cref="Activity"/> of the authenticating user.</returns>
+		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<IList<Activity>> GetUserActivitiesAsync();
+		Task<ActivitiesResponse> GetUserActivitiesAsync(ActivityType type = ActivityType.All);
 
 		/// <summary>
-		/// Asynchronously retrieves activities of the authenticating user.
+		/// Asynchronously retrieves activities of the authenticated user.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Activity"/> per page. Should be less than or equal to 50. 
+		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A list of <see cref="Activity"/> of the authenticating user.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		/// <exception cref="GeeklistApiException">If OAuth credentials was not provided.</exception>
-		Task<IList<Activity>> GetUserActivitiesAsync(int page, int count);
+		Task<ActivitiesResponse> GetUserActivitiesAsync(int page, int count, ActivityType type = ActivityType.All);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 activities of the given user.
 		/// </summary>
-		/// <param name="screenName">The screen name of the user whose activity is being requested.</param>
-		/// <returns>A list of <see cref="Activity"/> of the specified user.</returns>
+		/// <param name="screenName">The screen name of the user whose activities are being requested.</param>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<IList<Activity>> GetUserActivitiesAsync(string screenName);
+		Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, ActivityType type = ActivityType.All);
 
 		/// <summary>
-		/// Retrieves activities of the given user.
+		/// Asynchronously retrieves activities of the given user.
 		/// </summary>
-		/// <param name="screenName">The screen name of the user whose activity is being requested.</param>
+		/// <param name="screenName">The screen name of the user whose activities are being requested.</param>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Activity"/> per page. Should be less than or equal to 50. 
+		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A list of <see cref="Activity"/> of the specified user.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<IList<Activity>> GetUserActivitiesAsync(string screenName, int page, int count);
+		Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, int page, int count, ActivityType type = ActivityType.All);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 activities from all users
 		/// </summary>
-		/// <returns>A list of <see cref="Activity"/> of all users.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<IList<Activity>> GetAllActivitiesAsync();
+		Task<ActivitiesResponse> GetAllActivitiesAsync(ActivityType type = ActivityType.All);
 
 		/// <summary>
 		/// Asynchronously retrieves activities from all users.
 		/// </summary>
 		/// <param name="page">The page to return.</param>
 		/// <param name="count">
-		/// The number of <see cref="Activity"/> per page. Should be less than or equal to 50. 
+		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <returns>A list of <see cref="Activity"/> of all users.</returns>
+		/// <param name="type">The type of activities to return.</param>
+		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<IList<Activity>> GetAllActivitiesAsync(int page, int count);
+		Task<ActivitiesResponse> GetAllActivitiesAsync(int page, int count, ActivityType type = ActivityType.All);
 	}
 }

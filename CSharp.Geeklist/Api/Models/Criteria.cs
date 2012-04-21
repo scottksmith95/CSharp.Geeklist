@@ -20,24 +20,21 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist user's criteria information.
+	/// Represents a Geeklist criteria.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
 	public class Criteria
 	{
-		/// <summary>
-		/// Gets or sets the crieria's looking for list. ("looking_for")
-		/// </summary>
-		public List<string> LookingFor { get; set; }
+		[JsonProperty("available_for")]
+		public List<string> AvailableFor { get; set; }
 
-		/// <summary>
-		/// Gets or sets the criteria's available for list. ("available_for")
-		/// </summary>
-		public List<string> AvailabeFor { get; set; }
+		[JsonProperty("looking_for")]
+		public List<string> LookingFor { get; set; }
 	}
 }
