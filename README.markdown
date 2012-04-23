@@ -20,6 +20,7 @@ Resources
 ---------
 
 - API documentation can be found here: http://hackers.geekli.st/
+- NuGet package can be found here: https://nuget.org/packages/CSharp.Geeklist
 
 Warnings
 --------
