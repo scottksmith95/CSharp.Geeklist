@@ -53,7 +53,7 @@ namespace CSharp.Geeklist.Api.Impl
     public sealed class GeeklistTemplate : AbstractOAuth1ApiBinding, IGeeklist 
     {
 		//TODO: Change the Url to the live version of Geeklist's API
-		private static readonly Uri ApiUriBase = new Uri("http://sandbox-api.geekli.st/v1/");
+        private static readonly Uri ApiUriBase = new Uri("http://api.geekli.st/v1/");
 
         private IUserOperations _userOperations;
 		private ICardOperations _cardOperations;

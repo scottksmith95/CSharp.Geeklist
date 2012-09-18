@@ -38,9 +38,9 @@ namespace CSharp.Geeklist.Connect
         /// <param name="consumerSecret">The application's API secret.</param>
 		public GeeklistServiceProvider(string consumerKey, string consumerSecret)
             : base(consumerKey, consumerSecret, new OAuth1Template(consumerKey, consumerSecret,
-				"http://sandbox-api.geekli.st/v1/oauth/request_token",
-				"http://sandbox.geekli.st/oauth/authorize",
-				"http://sandbox-api.geekli.st/v1/oauth/access_token"))
+                "http://api.geekli.st/v1/oauth/request_token",
+                "https://geekli.st/oauth/authorize",
+                "http://api.geekli.st/v1/oauth/access_token"))
         {
 			//TODO: Change the Urls to the live version of Geeklist's API
         }
