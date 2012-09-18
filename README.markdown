@@ -25,6 +25,5 @@ Resources
 Warnings
 --------
 
-- The Geeklist API is beta and under active development.
-- The wrapper currently points to the sandbox for development and testing.
-- Jason Chapel has informed me Activities will recieve a major overhaul.
+- The Geeklist API is now live and no longer beta
+- I will be going over the new API and making updates as needed
