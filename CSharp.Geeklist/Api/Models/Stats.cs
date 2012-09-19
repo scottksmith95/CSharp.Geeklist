@@ -30,10 +30,25 @@ namespace CSharp.Geeklist.Api.Models
 	[Serializable]
 	public class Stats
 	{
-		[JsonProperty("highfives")]
-		public int Highfives { get; set; }
+        [JsonProperty("number_of_cards")]
+        public int NumberOfCards { get; set; }
 
-		[JsonProperty("views")]
-		public int Views { get; set; }
+        [JsonProperty("number_of_contributions")]
+        public int NumberOfContributions { get; set; }
+
+        [JsonProperty("number_of_creds")]
+        public int NumberOfCreds { get; set; }
+
+        [JsonProperty("number_of_highfives")]
+        public int NumberOfHighFives { get; set; }
+
+        [JsonProperty("number_of_mentions")]
+        public int NumberOfMentions { get; set; }
+
+        [JsonProperty("highfives")]
+        public int HighFives { get; set; }
+
+        [JsonProperty("views")]
+        public int Views { get; set; }
 	}
 }

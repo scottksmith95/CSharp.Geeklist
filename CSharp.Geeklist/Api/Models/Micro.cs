@@ -43,11 +43,17 @@ namespace CSharp.Geeklist.Api.Models
 		[JsonProperty("permalink")]
 		public string Permalink { get; set; }
 
+        [JsonProperty("_id")]
+        public string Id { get; set; }
+
+        [JsonProperty("trending_at")]
+        public string TrendingAt { get; set; }
+
+        [JsonProperty("trending_by")]
+        public string TrendingBy { get; set; }
+
 		[JsonProperty("trending_hist")]
 		public List<TrendingHistory> TrendingHist { get; set; }
-
-		[JsonProperty("trending_at")]
-		public string TrendingAt { get; set; }
 
 		[JsonProperty("updated_at")]
 		public string UpdatedAt { get; set; }
@@ -62,13 +68,16 @@ namespace CSharp.Geeklist.Api.Models
 		public bool IsTrending { get; set; }
 
 		[JsonProperty("hashtags")]
-		public List<object> Hashtags { get; set; }		//TODO: Need to support this more directly
+		public List<string> Hashtags { get; set; }
 
 		[JsonProperty("mentions")]
-		public List<object> Mentions { get; set; }		//TODO: Need to support this more directly
+		public List<string> Mentions { get; set; }
 
 		[JsonProperty("via_app")]
 		public ViaApp ViaApp { get; set; }
+
+        [JsonProperty("images")]
+        public Images Images { get; set; }
 
 		[JsonProperty("reply")]
 		public Reply Reply { get; set; }
@@ -81,14 +90,5 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("user")]
 		public ShallowUser User { get; set; }
-
-		[JsonProperty("id")]
-		public string Id { get; set; }
-
-		[JsonProperty("has_highfived")]
-		public bool HasHighfived { get; set; }
-
-		[JsonProperty("is_author")]
-		public bool IsAuthor { get; set; }
 	}
 }

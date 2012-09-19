@@ -35,8 +35,5 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("trending_by")]
 		public string TrendingBy { get; set; }
-
-		[JsonProperty("_id")]
-		public string Id { get; set; }
 	}
 }

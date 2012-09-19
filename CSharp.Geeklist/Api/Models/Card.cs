@@ -31,6 +31,9 @@ namespace CSharp.Geeklist.Api.Models
 	[Serializable]
 	public class Card
 	{
+        [JsonProperty("_id")]
+        public string Id { get; set; }
+
 		[JsonProperty("author_id")]
 		public string AuthorId { get; set; }
 
@@ -45,6 +48,9 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("is_trending")]
 		public bool IsTrending { get; set; }
+
+        [JsonProperty("link")]
+        public string Link { get; set; }
 
 		[JsonProperty("permalink")]
 		public string Permalink { get; set; }
@@ -70,45 +76,13 @@ namespace CSharp.Geeklist.Api.Models
 		[JsonProperty("updated_at")]
 		public string UpdatedAt { get; set; }
 
+        [JsonProperty("via_app")]
+        public ViaApp ViaApp { get; set; }
+
 		[JsonProperty("stats")]
 		public Stats Stats { get; set; }
 
 		[JsonProperty("short_code")]
 		public ShortCode ShortCode { get; set; }
-
-		[JsonProperty("id")]
-		public string Id { get; set; }
-
-		[JsonProperty("contributors")]
-		public List<Contributor> Contributors { get; set; }
-
-		[JsonProperty("has_highfived")]
-		public bool HasHighfived { get; set; }
-
-		[JsonProperty("is_author")]
-		public bool IsAuthor { get; set; }
-	}
-
-	/// <summary>
-	/// Represents a Geeklist card contributor.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	[Serializable]
-	public class Contributor
-	{
-		[JsonProperty("screen_name")]
-		public string ScreenName { get; set; }
-
-		[JsonProperty("screen_name_upper")]
-		public string ScreenNameUpper { get; set; }
-
-		[JsonProperty("avatar")]
-		public Avatar Avatar { get; set; }
-
-		[JsonProperty("social")]
-		public Social Social { get; set; }
-
-		[JsonProperty("id")]
-		public string Id { get; set; }
 	}
 }

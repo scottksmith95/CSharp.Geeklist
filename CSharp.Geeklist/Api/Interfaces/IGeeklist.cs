@@ -39,6 +39,11 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// </summary>
 		ICardOperations CardOperations { get; }
 
+        /// <summary>
+        /// Gets the portion of the Geeklist API containing the contribution operations.
+        /// </summary>
+        IContributionOperations ContributionOperations { get; }
+
 		/// <summary>
 		/// Gets the portion of the Geeklist API containing the micro operations.
 		/// </summary>

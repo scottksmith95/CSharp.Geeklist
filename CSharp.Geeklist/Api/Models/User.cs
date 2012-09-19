@@ -31,11 +31,11 @@ namespace CSharp.Geeklist.Api.Models
 	[Serializable]
 	public class User
 	{
-		[JsonProperty("active_at")]
-		public string ActiveAt { get; set; }
+        [JsonProperty("_id")]
+        public string Id { get; set; }
 
-		[JsonProperty("bio")]
-		public string Bio { get; set; }
+        [JsonProperty("bio")]
+        public string Bio { get; set; }
 
 		[JsonProperty("blog_link")]
 		public string BlogLink { get; set; }
@@ -45,9 +45,6 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("email")]
 		public string Email { get; set; }
-
-		[JsonProperty("featured_cards")]
-		public List<string> FeaturedCards { get; set; }
 
 		[JsonProperty("is_beta")]
 		public bool IsBeta { get; set; }
@@ -73,14 +70,14 @@ namespace CSharp.Geeklist.Api.Models
 		[JsonProperty("trending_at")]
 		public string TrendingAt { get; set; }
 
-		[JsonProperty("trending_hist")]
-		public List<TrendingHistory> TrendingHist { get; set; }
+		[JsonProperty("trending_by")]
+		public string TrendingBy { get; set; }
 
-		[JsonProperty("settings")]
-		public Settings Settings { get; set; }
+		[JsonProperty("github")]
+		public GitHub GitHub { get; set; }
 
-		[JsonProperty("criteria")]
-		public Criteria Criteria { get; set; }
+        [JsonProperty("stats")]
+        public Stats Stats { get; set; }
 
 		[JsonProperty("social")]
 		public Social Social { get; set; }
@@ -90,61 +87,5 @@ namespace CSharp.Geeklist.Api.Models
 
 		[JsonProperty("avatar")]
 		public Avatar Avatar { get; set; }
-
-		[JsonProperty("id")]
-		public string Id { get; set; }
-	}
-
-	/// <summary>
-	/// Represents a Geeklist user settings.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	[Serializable]
-	public class Settings
-	{
-		[JsonProperty("h5")]
-		public H5Settings H5 { get; set; }
-
-		[JsonProperty("micro")]
-		public MicroSettings Micro { get; set; }
-	}
-
-	/// <summary>
-	/// Represents a Geeklist user H5 settings.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	[Serializable]
-	public class H5Settings
-	{
-		[JsonProperty("tweet")]
-		public bool Tweet { get; set; }
-	}
-
-	/// <summary>
-	/// Represents a Geeklist user micro settings.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	[Serializable]
-	public class MicroSettings
-	{
-		[JsonProperty("card")]
-		public CardSettings Card { get; set; }
-
-		[JsonProperty("tweet")]
-		public bool Tweet { get; set; }
-	}
-
-	/// <summary>
-	/// Represents a Geeklist user card settings.
-	/// </summary>
-	/// <author>Scott Smith</author>
-	[Serializable]
-	public class CardSettings
-	{
-		[JsonProperty("headline")]
-		public string Headline { get; set; }
-
-		[JsonProperty("eid")]
-		public string Id { get; set; }
 	}
 }

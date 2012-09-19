@@ -59,6 +59,7 @@
     <Compile Include="Api\Impl\AbstractGeeklistOperations.cs" />
     <Compile Include="Api\Impl\ActivityTemplate.cs" />
     <Compile Include="Api\Impl\CardTemplate.cs" />
+    <Compile Include="Api\Impl\ContributionTemplate.cs" />
     <Compile Include="Api\Impl\FollowerTemplate.cs" />
     <Compile Include="Api\Impl\FollowingTemplate.cs" />
     <Compile Include="Api\Impl\GeeklistErrorHandler.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Api\Impl\Json\UserDeserializers.cs" />
     <Compile Include="Api\Impl\MicroTemplate.cs" />
     <Compile Include="Api\Impl\UserTemplate.cs" />
+    <Compile Include="Api\Interfaces\IContributionOperations.cs" />
     <Compile Include="Api\Interfaces\IActivityOperations.cs" />
     <Compile Include="Api\Interfaces\ICardOperations.cs" />
     <Compile Include="Api\Interfaces\IFollowerOperations.cs" />
@@ -88,11 +90,12 @@
     <Compile Include="Api\Models\CardResponse.cs" />
     <Compile Include="Api\Models\CardsResponse.cs" />
     <Compile Include="Api\Models\Company.cs" />
-    <Compile Include="Api\Models\Criteria.cs" />
     <Compile Include="Api\Models\FollowersDetails.cs" />
     <Compile Include="Api\Models\FollowersResponse.cs" />
     <Compile Include="Api\Models\FollowingDetails.cs" />
     <Compile Include="Api\Models\FollowingResponse.cs" />
+    <Compile Include="Api\Models\GitHub.cs" />
+    <Compile Include="Api\Models\Images.cs" />
     <Compile Include="Api\Models\Micro.cs" />
     <Compile Include="Api\Models\MicroResponse.cs" />
     <Compile Include="Api\Models\MicrosDetails.cs" />

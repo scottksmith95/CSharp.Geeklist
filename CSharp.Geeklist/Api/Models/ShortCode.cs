@@ -30,9 +30,6 @@ namespace CSharp.Geeklist.Api.Models
 	[Serializable]
 	public class ShortCode
 	{
-		[JsonProperty("id")]
-		public string Id { get; set; }
-
 		[JsonProperty("gklst_url")]
 		public string GklstUrl { get; set; }
 	}

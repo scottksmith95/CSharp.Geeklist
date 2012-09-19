@@ -42,26 +42,30 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region ICardOperations Members
 
-		public CardsResponse GetUserCards()
+		public CardsResponse GetUserCards(bool featured = false)
 		{
-			return GetUserCards(1, 10);
+            return GetUserCards(1, 10, featured);
 		}
 
-		public CardsResponse GetUserCards(int page, int count)
+        public CardsResponse GetUserCards(int page, int count, bool featured = false)
 		{
 			EnsureIsAuthorized();
             var parameters = BuildPagingParametersWithCount(page, count);
+            if (featured)
+                parameters.Add(new NameValueCollection { { "featured", featured.ToString() } });
 			return _restTemplate.GetForObject<CardsResponse>(BuildUrl("user/cards", parameters));
 		}
 
-		public CardsResponse GetUserCards(string screenName)
+        public CardsResponse GetUserCards(string screenName, bool featured = false)
 		{
-			return GetUserCards(screenName, 1, 10);
+            return GetUserCards(screenName, 1, 10, featured);
 		}
 
-		public CardsResponse GetUserCards(string screenName, int page, int count)
+        public CardsResponse GetUserCards(string screenName, int page, int count, bool featured = false)
 		{
 			var parameters = BuildPagingParametersWithCount(page, count);
+            if (featured)
+                parameters.Add(new NameValueCollection { { "featured", featured.ToString() } });
 			return _restTemplate.GetForObject<CardsResponse>(BuildUrl("users/" + screenName + "/cards", parameters));
 		}
 
@@ -77,26 +81,30 @@ namespace CSharp.Geeklist.Api.Impl
 			return _restTemplate.PostForObject<CardResponse>("cards", request);
 		}
 
-		public Task<CardsResponse> GetUserCardsAsync()
+		public Task<CardsResponse> GetUserCardsAsync(bool featured = false)
 		{
-			return GetUserCardsAsync(1, 10);
+            return GetUserCardsAsync(1, 10, featured);
 		}
 
-		public Task<CardsResponse> GetUserCardsAsync(int page, int count)
+        public Task<CardsResponse> GetUserCardsAsync(int page, int count, bool featured = false)
 		{
 			EnsureIsAuthorized();
 			var parameters = BuildPagingParametersWithCount(page, count);
+            if (featured)
+                parameters.Add(new NameValueCollection { { "featured", featured.ToString() } });
 			return _restTemplate.GetForObjectAsync<CardsResponse>(BuildUrl("user/cards", parameters));
 		}
 
-		public Task<CardsResponse> GetUserCardsAsync(string screenName)
+        public Task<CardsResponse> GetUserCardsAsync(string screenName, bool featured = false)
 		{
-			return GetUserCardsAsync(screenName, 1, 10);
+            return GetUserCardsAsync(screenName, 1, 10, featured);
 		}
 
-		public Task<CardsResponse> GetUserCardsAsync(string screenName, int page, int count)
+        public Task<CardsResponse> GetUserCardsAsync(string screenName, int page, int count, bool featured = false)
 		{
 			var parameters = BuildPagingParametersWithCount(page, count);
+            if (featured)
+                parameters.Add(new NameValueCollection { { "featured", featured.ToString() } });
 			return _restTemplate.GetForObjectAsync<CardsResponse>(BuildUrl("users/" + screenName + "/cards", parameters));
 		}
 

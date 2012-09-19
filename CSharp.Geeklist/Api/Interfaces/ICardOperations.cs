@@ -32,9 +32,10 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <summary>
 		/// Retrieves the first 10 cards of the authenticated user.
 		/// </summary>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		CardsResponse GetUserCards();
+		CardsResponse GetUserCards(bool featured = false);
 
 		/// <summary>
 		/// Retrieves cards of the authenticated user.
@@ -44,17 +45,19 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		CardsResponse GetUserCards(int page, int count);
+        CardsResponse GetUserCards(int page, int count, bool featured = false);
 
 		/// <summary>
 		/// Retrieves the first 10 cards of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose cards are being requested.</param>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		CardsResponse GetUserCards(string screenName);
+        CardsResponse GetUserCards(string screenName, bool featured = false);
 
 		/// <summary>
 		/// Retrieves cards of the given user.
@@ -65,9 +68,10 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		CardsResponse GetUserCards(string screenName, int page, int count);
+        CardsResponse GetUserCards(string screenName, int page, int count, bool featured = false);
 
 		/// <summary>
 		/// Retrieves the card with the given card id.
@@ -88,9 +92,10 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <summary>
 		/// Asynchronously retrieves the first 10 cards of the authenticated user.
 		/// </summary>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<CardsResponse> GetUserCardsAsync();
+		Task<CardsResponse> GetUserCardsAsync(bool featured = false);
 
 		/// <summary>
 		/// Asynchronously retrieves cards of the authenticated user.
@@ -100,17 +105,19 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<CardsResponse> GetUserCardsAsync(int page, int count);
+        Task<CardsResponse> GetUserCardsAsync(int page, int count, bool featured = false);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 cards of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose cards are being requested.</param>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<CardsResponse> GetUserCardsAsync(string screenName);
+        Task<CardsResponse> GetUserCardsAsync(string screenName, bool featured = false);
 
 		/// <summary>
 		/// Asynchronously retrieves cards of the given user.
@@ -121,9 +128,10 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="CardResponse"/>s per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
+        /// <param name="featured">Returns only featured cards.</param>
 		/// <returns>A <see cref="CardsResponse"/> with cards of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<CardsResponse> GetUserCardsAsync(string screenName, int page, int count);
+        Task<CardsResponse> GetUserCardsAsync(string screenName, int page, int count, bool featured = false);
 
 		/// <summary>
 		/// Asynchronously retrieves the card with the given card id.

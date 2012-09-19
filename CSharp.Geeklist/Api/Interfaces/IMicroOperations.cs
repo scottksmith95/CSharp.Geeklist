@@ -89,11 +89,10 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// Creates a new micro for the authenticated user
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
-		/// <param name="type">The type of item being replied to. Can be card or micro.</param>
 		/// <param name="itemId">The id of the card or micro being replied to.</param>
 		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		MicroResponse CreateMicro(string status, string type, string itemId);
+		MicroResponse CreateMicro(string status, string itemId);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 micros of the authenticated user.
@@ -155,10 +154,9 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// Asynchronously creates a new micro for the authenticated user
 		/// </summary>
 		/// <param name="status">The content for the micro.</param>
-		/// <param name="type">The type of item being replied to. Can be card or micro.</param>
 		/// <param name="itemId">The id of the card or micro being replied to.</param>
 		/// <returns>The created <see cref="MicroResponse"/>.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<MicroResponse> CreateMicroAsync(string status, string type, string itemId);
+		Task<MicroResponse> CreateMicroAsync(string status, string itemId);
 	}
 }

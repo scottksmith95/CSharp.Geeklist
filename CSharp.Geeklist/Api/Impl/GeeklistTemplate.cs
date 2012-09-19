@@ -57,6 +57,7 @@ namespace CSharp.Geeklist.Api.Impl
 
         private IUserOperations _userOperations;
 		private ICardOperations _cardOperations;
+        private IContributionOperations _contributionOperations;
 		private IMicroOperations _microOperations;
 		private IFollowerOperations _followerOperations;
 		private IFollowingOperations _followingOperations;
@@ -107,6 +108,14 @@ namespace CSharp.Geeklist.Api.Impl
 		{
 			get { return _cardOperations; }
 		}
+
+        /// <summary>
+        /// Gets the portion of the Geeklist API containing the contribution operations.
+        /// </summary>
+        public IContributionOperations ContributionOperations
+        {
+            get { return _contributionOperations; }
+        }
 
 		/// <summary>
 		/// Gets the portion of the Geeklist API containing the micro operations.
@@ -218,6 +227,7 @@ namespace CSharp.Geeklist.Api.Impl
         {
             _userOperations = new UserTemplate(RestTemplate, IsAuthorized);
 			_cardOperations = new CardTemplate(RestTemplate, IsAuthorized);
+            _contributionOperations = new ContributionTemplate(RestTemplate, IsAuthorized);
 			_microOperations = new MicroTemplate(RestTemplate, IsAuthorized);
 			_followerOperations = new FollowerTemplate(RestTemplate, IsAuthorized);
 			_followingOperations = new FollowingTemplate(RestTemplate, IsAuthorized);

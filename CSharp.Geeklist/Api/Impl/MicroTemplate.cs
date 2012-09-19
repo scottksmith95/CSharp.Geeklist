@@ -77,10 +77,10 @@ namespace CSharp.Geeklist.Api.Impl
 			return _restTemplate.PostForObject<MicroResponse>("micros", request);
 		}
 
-		public MicroResponse CreateMicro(string status, string type, string itemId)
+		public MicroResponse CreateMicro(string status, string itemId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection { { "status", status }, { "type", type }, { "in_reply_to", itemId } };
+			var request = new NameValueCollection { { "status", status }, { "in_reply_to", itemId } };
 			return _restTemplate.PostForObject<MicroResponse>("micros", request);
 		}
 
@@ -119,10 +119,10 @@ namespace CSharp.Geeklist.Api.Impl
 			return _restTemplate.PostForObjectAsync<MicroResponse>("micros", request);
 		}
 
-		public Task<MicroResponse> CreateMicroAsync(string status, string type, string itemId)
+		public Task<MicroResponse> CreateMicroAsync(string status, string itemId)
 		{
 			EnsureIsAuthorized();
-			var request = new NameValueCollection { { "status", status }, { "type", type }, { "in_reply_to", itemId } };
+			var request = new NameValueCollection { { "status", status }, { "in_reply_to", itemId } };
 			return _restTemplate.PostForObjectAsync<MicroResponse>("micros", request);
 		}
 

@@ -14,8 +14,8 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
 		private const string CallbackUrl = "http://localhost:31201/Geeklist/Callback";
 
 		// Set your consumer key & secret here
-		private const string GeeklistApiKey = "ENTER YOUR KEY HERE";
-		private const string GeeklistApiSecret = "ENTER YOUR SECRET HERE";
+        private const string GeeklistApiKey = "gXYTScM7m_hy7yCzHyABBuXqhmw";
+        private const string GeeklistApiSecret = "FFGHJSpygAXdnwIus7_IymjF1eiHbSEALEdpkF3chas";
 
 		readonly IOAuth1ServiceProvider<IGeeklist> _geeklistProvider = new GeeklistServiceProvider(GeeklistApiKey, GeeklistApiSecret);
 
@@ -29,24 +29,42 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
 				//Uncomment the following API calls to try out different areas
 
 				//User operation
-				var user = geeklistClient.UserOperations.GetUserAsync().Result;
-				//user = geeklistClient.UserOperations.GetUser();
-				//user = geeklistClient.UserOperations.GetUserAsync("scottksmith95").Result;
-				//user = geeklistClient.UserOperations.GetUser("kjnilsson");
+                var user = geeklistClient.UserOperations.GetUserAsync().Result;
+                //user = geeklistClient.UserOperations.GetUser();
+                //user = geeklistClient.UserOperations.GetUserAsync("scottksmith95").Result;
+                //user = geeklistClient.UserOperations.GetUser("chapel");
 
 				//Card operations
-				//var cards = geeklistClient.CardOperations.GetUserCardsAsync().Result;
-				//cards = geeklistClient.CardOperations.GetUserCards();
-				//cards = geeklistClient.CardOperations.GetUserCardsAsync("scottksmith95").Result;
-				//cards = geeklistClient.CardOperations.GetUserCards("shl");
-				//cards = geeklistClient.CardOperations.GetUserCardsAsync(1, 50).Result;
-				//cards = geeklistClient.CardOperations.GetUserCards(1, 50);
-				//cards = geeklistClient.CardOperations.GetUserCardsAsync("scottksmith95", 1, 50).Result;
-				//cards = geeklistClient.CardOperations.GetUserCards("shl", 1, 50);
-				//var card = geeklistClient.CardOperations.GetCardAsync("95e4c5db9a3c0e15749bf1defd76f689d777cfe56741a0bb8e6be942a9062e2e").Result;
-				//card = geeklistClient.CardOperations.GetCard("119e9c77bb4ae22813bfbd97349028a91b7a1913e29edab2412bd8dd8c33fd06");
-				//var newCard = geeklistClient.CardOperations.CreateCardAsync("My new card via the API").Result;
-				//newCard = geeklistClient.CardOperations.CreateCard("My new card via the API part 2");
+                //var cards = geeklistClient.CardOperations.GetUserCardsAsync().Result;
+                //cards = geeklistClient.CardOperations.GetUserCards();
+                //cards = geeklistClient.CardOperations.GetUserCardsAsync("scottksmith95").Result;
+                //cards = geeklistClient.CardOperations.GetUserCards("chapel");
+                //cards = geeklistClient.CardOperations.GetUserCardsAsync(1, 50).Result;
+                //cards = geeklistClient.CardOperations.GetUserCards(1, 50);
+                //cards = geeklistClient.CardOperations.GetUserCardsAsync("scottksmith95", 1, 50).Result;
+                //cards = geeklistClient.CardOperations.GetUserCards("chapel", 1, 50);
+                //cards = geeklistClient.CardOperations.GetUserCardsAsync(true).Result;
+                //cards = geeklistClient.CardOperations.GetUserCards(true);
+                //cards = geeklistClient.CardOperations.GetUserCardsAsync("scottksmith95", true).Result;
+                //cards = geeklistClient.CardOperations.GetUserCards("chapel", true);
+                //cards = geeklistClient.CardOperations.GetUserCardsAsync(1, 50, true).Result;
+                //cards = geeklistClient.CardOperations.GetUserCards(1, 50, true);
+                //cards = geeklistClient.CardOperations.GetUserCardsAsync("scottksmith95", 1, 50, true).Result;
+                //cards = geeklistClient.CardOperations.GetUserCards("chapel", 1, 50, true);
+                //var card = geeklistClient.CardOperations.GetCardAsync("4f92e46ce50bc701000016fc").Result;
+                //card = geeklistClient.CardOperations.GetCard("4f9724d265f9710100000013");
+                //var newCard = geeklistClient.CardOperations.CreateCardAsync("Test card via API from CSharp.Geeklist part 1").Result;
+                //newCard = geeklistClient.CardOperations.CreateCard("Test card via API from CSharp.Geeklist part 2");
+
+                //Contribution operations
+                //var contributions = geeklistClient.ContributionOperations.GetUserContributionsAsync().Result;
+                //contributions = geeklistClient.ContributionOperations.GetUserContributions();
+                //contributions = geeklistClient.ContributionOperations.GetUserContributionsAsync("scottksmith95").Result;
+                //contributions = geeklistClient.ContributionOperations.GetUserContributions("chapel");
+                //contributions = geeklistClient.ContributionOperations.GetUserContributionsAsync(1, 50).Result;
+                //contributions = geeklistClient.ContributionOperations.GetUserContributions(1, 50);
+                //contributions = geeklistClient.ContributionOperations.GetUserContributionsAsync("scottksmith95", 1, 50).Result;
+                //contributions = geeklistClient.ContributionOperations.GetUserContributions("chapel", 1, 50);
 
 				//Follower operations
 				//var followers = geeklistClient.FollowerOperations.GetUserFollowersAsync().Result;
@@ -106,20 +124,20 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
 				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Signup);
 
 				//Micro operations
-				//var micros = geeklistClient.MicroOperations.GetUserMicrosAsync().Result;
-				//micros = geeklistClient.MicroOperations.GetUserMicros();
-				//micros = geeklistClient.MicroOperations.GetUserMicrosAsync("chapel").Result;
-				//micros = geeklistClient.MicroOperations.GetUserMicros("chapel");
-				//micros = geeklistClient.MicroOperations.GetUserMicrosAsync(1, 50).Result;
-				//micros = geeklistClient.MicroOperations.GetUserMicros(1, 50);
-				//micros = geeklistClient.MicroOperations.GetUserMicrosAsync("chapel", 1, 50).Result;
-				//micros = geeklistClient.MicroOperations.GetUserMicros("chapel", 1, 50);
-				//var micro = geeklistClient.MicroOperations.GetMicroAsync("c1e092e02938ad2a336d51ffed9d3244a8dceb80b9a00b26257549b6943c417d").Result;
-				//micro = geeklistClient.MicroOperations.GetMicro("c1e092e02938ad2a336d51ffed9d3244a8dceb80b9a00b26257549b6943c417d");
-				//var newMicro = geeklistClient.MicroOperations.CreateMicroAsync("My new micro via the API").Result;
-				//newMicro = geeklistClient.MicroOperations.CreateMicro("My new micro via the API part 2");
-				//newMicro = geeklistClient.MicroOperations.CreateMicroAsync("My new micro via the API part 4", "micro", "c1e092e02938ad2a336d51ffed9d3244a8dceb80b9a00b26257549b6943c417d").Result;
-				//newMicro = geeklistClient.MicroOperations.CreateMicro("My new micro via the API part 3", "micro", "c1e092e02938ad2a336d51ffed9d3244a8dceb80b9a00b26257549b6943c417d");
+                //var micros = geeklistClient.MicroOperations.GetUserMicrosAsync().Result;
+                //micros = geeklistClient.MicroOperations.GetUserMicros();
+                //micros = geeklistClient.MicroOperations.GetUserMicrosAsync("chapel").Result;
+                //micros = geeklistClient.MicroOperations.GetUserMicros("chapel");
+                //micros = geeklistClient.MicroOperations.GetUserMicrosAsync(1, 50).Result;
+                //micros = geeklistClient.MicroOperations.GetUserMicros(1, 50);
+                //micros = geeklistClient.MicroOperations.GetUserMicrosAsync("chapel", 1, 50).Result;
+                //micros = geeklistClient.MicroOperations.GetUserMicros("chapel", 1, 50);
+                //var micro = geeklistClient.MicroOperations.GetMicroAsync("5059e0a4b542be83330000b3").Result;
+                //micro = geeklistClient.MicroOperations.GetMicro("5022d9ad5fcb3b02000045ac");
+                //var newMicro = geeklistClient.MicroOperations.CreateMicroAsync("Test micro via the API from CSharp.Geeklist part 1").Result;
+                //newMicro = geeklistClient.MicroOperations.CreateMicro("Test micro via the API from CSharp.Geeklist part 2");
+                //newMicro = geeklistClient.MicroOperations.CreateMicroAsync("Test micro via the API from CSharp.Geeklist part 3", "5059e0a4b542be83330000b3").Result;
+                //newMicro = geeklistClient.MicroOperations.CreateMicro("Test micro via the API from CSharp.Geeklist part 4", "5059e099b542be83330000ad");
 
 				//Highfive operations
 				//var highfiveMessage = geeklistClient.HighfiveOperations.HighfiveAsync(HighfiveType.Card, "95e4c5db9a3c0e15749bf1defd76f689d777cfe56741a0bb8e6be942a9062e2e").Result;
