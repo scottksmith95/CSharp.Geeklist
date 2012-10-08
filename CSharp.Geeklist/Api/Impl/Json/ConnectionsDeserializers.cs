@@ -18,37 +18,23 @@
 
 #endregion
 
-using System;
+using CSharp.Geeklist.Api.Models;
 using Newtonsoft.Json;
+using Spring.Json;
 
-namespace CSharp.Geeklist.Api.Models
+namespace CSharp.Geeklist.Api.Impl.Json
 {
 	/// <summary>
-	/// Represents a Geeklist activity.
+	/// JSON deserializer for users being followed. 
 	/// </summary>
 	/// <author>Scott Smith</author>
-	[Serializable]
-	public class Activity
+	class ConnectionsDeserializer : IJsonDeserializer
 	{
-		[JsonProperty("type")]
-		public string Type { get; set; }
-
-        [JsonProperty("_id")]
-        public string Id { get; set; }
-
-		[JsonProperty("updated_at")]
-		public string UpdatedAt { get; set; }
-
-		[JsonProperty("created_at")]
-		public string CreatedAt { get; set; }
-
-		[JsonProperty("is_active")]
-		public bool IsActive { get; set; }
-
-		[JsonProperty("gfk")]
-		public object Gfk { get; set; }			//TODO: Need to support this more directly
-
-		[JsonProperty("user")]
-		public ShallowUser User { get; set; }
+		public object Deserialize(JsonValue value, JsonMapper mapper)
+		{
+            var deserializedObject = JsonConvert.DeserializeObject<ConnectionsResponse>(value.ToString());
+			deserializedObject.RawJson = value.ToString();
+			return deserializedObject;
+		}
 	}
 }

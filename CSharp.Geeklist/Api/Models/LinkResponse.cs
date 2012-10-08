@@ -24,31 +24,19 @@ using Newtonsoft.Json;
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist activity.
+	/// Represents a Geeklist link response.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
-	public class Activity
+	public class LinkResponse
 	{
-		[JsonProperty("type")]
-		public string Type { get; set; }
+		[JsonProperty("status")]
+		public string Status { get; set; }
 
-        [JsonProperty("_id")]
-        public string Id { get; set; }
+		[JsonProperty("data")]
+        public Link Link { get; set; }
 
-		[JsonProperty("updated_at")]
-		public string UpdatedAt { get; set; }
-
-		[JsonProperty("created_at")]
-		public string CreatedAt { get; set; }
-
-		[JsonProperty("is_active")]
-		public bool IsActive { get; set; }
-
-		[JsonProperty("gfk")]
-		public object Gfk { get; set; }			//TODO: Need to support this more directly
-
-		[JsonProperty("user")]
-		public ShallowUser User { get; set; }
+		[JsonIgnore]
+		public string RawJson { get; set; }
 	}
 }

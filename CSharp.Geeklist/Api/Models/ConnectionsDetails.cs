@@ -19,36 +19,22 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace CSharp.Geeklist.Api.Models
 {
 	/// <summary>
-	/// Represents a Geeklist activity.
+	/// Represents Geeklist connection details.
 	/// </summary>
 	/// <author>Scott Smith</author>
 	[Serializable]
-	public class Activity
+	public class ConnectionsDetails
 	{
-		[JsonProperty("type")]
-		public string Type { get; set; }
+		[JsonProperty("total_connections")]
+		public int TotalConnections { get; set; }
 
-        [JsonProperty("_id")]
-        public string Id { get; set; }
-
-		[JsonProperty("updated_at")]
-		public string UpdatedAt { get; set; }
-
-		[JsonProperty("created_at")]
-		public string CreatedAt { get; set; }
-
-		[JsonProperty("is_active")]
-		public bool IsActive { get; set; }
-
-		[JsonProperty("gfk")]
-		public object Gfk { get; set; }			//TODO: Need to support this more directly
-
-		[JsonProperty("user")]
-		public ShallowUser User { get; set; }
+        [JsonProperty("connections")]
+		public List<User> Connections { get; set; }
 	}
 }

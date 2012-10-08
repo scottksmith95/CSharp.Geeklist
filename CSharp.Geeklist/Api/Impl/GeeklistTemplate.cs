@@ -61,6 +61,8 @@ namespace CSharp.Geeklist.Api.Impl
 		private IMicroOperations _microOperations;
 		private IFollowerOperations _followerOperations;
 		private IFollowingOperations _followingOperations;
+        private IConnectionOperations _connectionOperations;
+        private ILinkOperations _linkOperations;
 		private IActivityOperations _activityOperations;
 		private IHighfiveOperations _highfiveOperations;
 
@@ -141,6 +143,22 @@ namespace CSharp.Geeklist.Api.Impl
 			get { return _followingOperations; }
 		}
 
+        /// <summary>
+        /// Gets the portion of the Geeklist API containing the connection operations.
+        /// </summary>
+        public IConnectionOperations ConnectionOperations
+        {
+            get { return _connectionOperations; }
+        }
+
+        ///// <summary>
+        ///// Gets the portion of the Geeklist API containing the link operations.
+        ///// </summary>
+        //public ILinkOperations LinkOperations
+        //{
+        //    get { return _linkOperations; }
+        //}
+
 		/// <summary>
 		/// Gets the portion of the Geeklist API containing the activity operations.
 		/// </summary>
@@ -218,6 +236,9 @@ namespace CSharp.Geeklist.Api.Impl
 			jsonMapper.RegisterDeserializer(typeof(MicrosResponse), new MicrosDeserializer());
 			jsonMapper.RegisterDeserializer(typeof(FollowersResponse), new FollowersDeserializer());
 			jsonMapper.RegisterDeserializer(typeof(FollowingResponse), new FollowingDeserializer());
+            jsonMapper.RegisterDeserializer(typeof(ConnectionsResponse), new ConnectionsDeserializer());
+            jsonMapper.RegisterDeserializer(typeof(LinkResponse), new LinkDeserializer());
+            jsonMapper.RegisterDeserializer(typeof(LinksResponse), new LinksDeserializer());
 			jsonMapper.RegisterDeserializer(typeof(ActivitiesResponse), new ActivitiesDeserializer());
 
             return new SpringJsonHttpMessageConverter(jsonMapper);
@@ -231,6 +252,8 @@ namespace CSharp.Geeklist.Api.Impl
 			_microOperations = new MicroTemplate(RestTemplate, IsAuthorized);
 			_followerOperations = new FollowerTemplate(RestTemplate, IsAuthorized);
 			_followingOperations = new FollowingTemplate(RestTemplate, IsAuthorized);
+            _connectionOperations = new ConnectionsTemplate(RestTemplate, IsAuthorized);
+            _linkOperations = new LinkTemplate(RestTemplate, IsAuthorized);
 			_activityOperations = new ActivityTemplate(RestTemplate, IsAuthorized);
 			_highfiveOperations = new HighfiveTemplate(RestTemplate, IsAuthorized);
         }

@@ -50,5 +50,11 @@ namespace CSharp.Geeklist.Api.Models
 
         [JsonProperty("views")]
         public int Views { get; set; }
+
+        [JsonProperty("relinks")]
+        public int Relinks { get; set; }
+
+        [JsonProperty("clicks")]
+        public int Clicks { get; set; }
 	}
 }

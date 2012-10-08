@@ -2,6 +2,7 @@
 using CSharp.Geeklist.Api.Interfaces;
 using CSharp.Geeklist.Connect;
 using Spring.Social.OAuth1;
+using CSharp.Geeklist.Api.Enums;
 
 
 namespace CSharp.Geeklist.MVC_3_Example.Controllers
@@ -14,8 +15,8 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
 		private const string CallbackUrl = "http://localhost:31201/Geeklist/Callback";
 
 		// Set your consumer key & secret here
-        private const string GeeklistApiKey = "gXYTScM7m_hy7yCzHyABBuXqhmw";
-        private const string GeeklistApiSecret = "FFGHJSpygAXdnwIus7_IymjF1eiHbSEALEdpkF3chas";
+        private const string GeeklistApiKey = "ENTER YOUR KEY HERE";
+        private const string GeeklistApiSecret = "ENTER YOUR SECRET HERE";
 
 		readonly IOAuth1ServiceProvider<IGeeklist> _geeklistProvider = new GeeklistServiceProvider(GeeklistApiKey, GeeklistApiSecret);
 
@@ -67,61 +68,91 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
                 //contributions = geeklistClient.ContributionOperations.GetUserContributions("chapel", 1, 50);
 
 				//Follower operations
-				//var followers = geeklistClient.FollowerOperations.GetUserFollowersAsync().Result;
-				//followers = geeklistClient.FollowerOperations.GetUserFollowers();
-				//followers = geeklistClient.FollowerOperations.GetUserFollowersAsync("kjnilsson").Result;
-				//followers = geeklistClient.FollowerOperations.GetUserFollowers("shl");
-				//followers = geeklistClient.FollowerOperations.GetUserFollowersAsync(1, 50).Result;
-				//followers = geeklistClient.FollowerOperations.GetUserFollowers(1, 50);
-				//followers = geeklistClient.FollowerOperations.GetUserFollowersAsync("kcorwin", 1, 50).Result;
-				//followers = geeklistClient.FollowerOperations.GetUserFollowers("shl", 1, 50);
+                //var followers = geeklistClient.FollowerOperations.GetUserFollowersAsync().Result;
+                //followers = geeklistClient.FollowerOperations.GetUserFollowers();
+                //followers = geeklistClient.FollowerOperations.GetUserFollowersAsync("chapel").Result;
+                //followers = geeklistClient.FollowerOperations.GetUserFollowers("chapel");
+                //followers = geeklistClient.FollowerOperations.GetUserFollowersAsync(1, 50).Result;
+                //followers = geeklistClient.FollowerOperations.GetUserFollowers(1, 50);
+                //followers = geeklistClient.FollowerOperations.GetUserFollowersAsync("chapel", 1, 50).Result;
+                //followers = geeklistClient.FollowerOperations.GetUserFollowers("chapel", 1, 50);
 				//var followerMessage = geeklistClient.FollowerOperations.StartFollowingAsync("eae07cd5a5ae4ab5892fa9e4514704d831df4250a7992f28b1aaaa86d1eeb28a").Result; //kjnilsson
 				//followerMessage = geeklistClient.FollowerOperations.StopFollowingAsync("eae07cd5a5ae4ab5892fa9e4514704d831df4250a7992f28b1aaaa86d1eeb28a").Result;
 				//followerMessage = geeklistClient.FollowerOperations.StartFollowing("eae07cd5a5ae4ab5892fa9e4514704d831df4250a7992f28b1aaaa86d1eeb28a");
 				//followerMessage = geeklistClient.FollowerOperations.StopFollowing("eae07cd5a5ae4ab5892fa9e4514704d831df4250a7992f28b1aaaa86d1eeb28a");
 
 				//Following operations
-				//var following = geeklistClient.FollowingOperations.GetUserFollowingAsync().Result;
-				//following = geeklistClient.FollowingOperations.GetUserFollowing();
-				//following = geeklistClient.FollowingOperations.GetUserFollowingAsync("creationix").Result;
-				//following = geeklistClient.FollowingOperations.GetUserFollowing("shl");
-				//following = geeklistClient.FollowingOperations.GetUserFollowingAsync(1, 50).Result;
-				//following = geeklistClient.FollowingOperations.GetUserFollowing(1, 50);
-				//following = geeklistClient.FollowingOperations.GetUserFollowingAsync("kcorwin", 1, 50).Result;
-				//following = geeklistClient.FollowingOperations.GetUserFollowing("shl", 1, 50);
+                //var following = geeklistClient.FollowingOperations.GetUserFollowingAsync().Result;
+                //following = geeklistClient.FollowingOperations.GetUserFollowing();
+                //following = geeklistClient.FollowingOperations.GetUserFollowingAsync("chapel").Result;
+                //following = geeklistClient.FollowingOperations.GetUserFollowing("chapel");
+                //following = geeklistClient.FollowingOperations.GetUserFollowingAsync(1, 50).Result;
+                //following = geeklistClient.FollowingOperations.GetUserFollowing(1, 50);
+                //following = geeklistClient.FollowingOperations.GetUserFollowingAsync("chapel", 1, 50).Result;
+                //following = geeklistClient.FollowingOperations.GetUserFollowing("chapel", 1, 50);
+
+                //Connection operations
+                //var connections = geeklistClient.ConnectionOperations.GetUserConnectionsAsync().Result;
+                //connections = geeklistClient.ConnectionOperations.GetUserConnections();
+                //connections = geeklistClient.ConnectionOperations.GetUserConnectionsAsync("chapel").Result;
+                //connections = geeklistClient.ConnectionOperations.GetUserConnections("chapel");
+                //connections = geeklistClient.ConnectionOperations.GetUserConnectionsAsync(1, 50).Result;
+                //connections = geeklistClient.ConnectionOperations.GetUserConnections(1, 50);
+                //connections = geeklistClient.ConnectionOperations.GetUserConnectionsAsync("chapel", 1, 50).Result;
+                //connections = geeklistClient.ConnectionOperations.GetUserConnections("chapel", 1, 50);
+
+                //Link operations
+                //var links = geeklistClient.LinkOperations.GetUserLinksAsync().Result;
+                //links = geeklistClient.LinkOperations.GetUserLinks();
+                //links = geeklistClient.LinkOperations.GetUserLinksAsync("scottksmith95").Result;
+                //links = geeklistClient.LinkOperations.GetUserLinks("chapel");
+                //links = geeklistClient.LinkOperations.GetUserLinksAsync(1, 50).Result;
+                //links = geeklistClient.LinkOperations.GetUserLinks(1, 50);
+                //links = geeklistClient.LinkOperations.GetUserLinksAsync("scottksmith95", 1, 50).Result;
+                //links = geeklistClient.LinkOperations.GetUserLinks("chapel", 1, 50);
+                //links = geeklistClient.LinkOperations.GetPopularLinksAsync().Result;
+                //links = geeklistClient.LinkOperations.GetPopularLinks();
+                //links = geeklistClient.LinkOperations.GetPopularLinksAsync("javascript").Result;
+                //links = geeklistClient.LinkOperations.GetPopularLinks("javascript");
+                //links = geeklistClient.LinkOperations.GetPopularLinksAsync(1, 50, "javascript").Result;
+                //links = geeklistClient.LinkOperations.GetPopularLinks(1, 50, "javascript");
+                //var link = geeklistClient.LinkOperations.GetLinkAsync("50270fad2d3cfc0200011122").Result;
+                //link = geeklistClient.LinkOperations.GetLink("50270fad2d3cfc0200011122");
+                //var newLink = geeklistClient.LinkOperations.CreateLinkAsync("Test card via API from CSharp.Geeklist part 1").Result;
+                //newLink = geeklistClient.LinkOperations.CreateLink("Test card via API from CSharp.Geeklist part 2");
 
 				//Activity operations
-				//var activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync().Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities();
-				//activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("creationix").Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities("shl");
-				//activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(1, 50).Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities(1, 50);
-				//activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("kcorwin", 1, 50).Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities("shl", 1, 50);
-				//activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync().Result;
-				//activites = geeklistClient.ActivityOperations.GetAllActivities();
-				//activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(1, 50).Result;
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50);
-				//activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(ActivityType.Micro).Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities(ActivityType.Micro);
-				//activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("creationix", ActivityType.Micro).Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities("shl", ActivityType.Micro);
-				//activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(1, 50, ActivityType.Micro).Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities(1, 50, ActivityType.Micro);
-				//activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("kcorwin", 1, 50, ActivityType.Micro).Result;
-				//activites = geeklistClient.ActivityOperations.GetUserActivities("shl", 1, 50, ActivityType.Micro);
-				//activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(ActivityType.Micro).Result;
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(ActivityType.Micro);
-				//activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(1, 50, ActivityType.Micro).Result;
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Card);
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Contributor);
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Follow);
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Highfive);
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Micro);
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Profile);
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Repo);
-				//activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Signup);
+                //var activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync().Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities();
+                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("creationix").Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities("scottksmith95");
+                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(1, 50).Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities(1, 50);
+                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("kcorwin", 1, 50).Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities("shl", 1, 50);
+                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync().Result;
+                //activites = geeklistClient.ActivityOperations.GetAllActivities();
+                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(1, 50).Result;
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50);
+                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(ActivityType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities(ActivityType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("creationix", ActivityType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities("shl", ActivityType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(1, 50, ActivityType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities(1, 50, ActivityType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("kcorwin", 1, 50, ActivityType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetUserActivities("shl", 1, 50, ActivityType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(ActivityType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(ActivityType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(1, 50, ActivityType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Card);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Contributor);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Follow);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Highfive);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Profile);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Repo);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Signup);
 
 				//Micro operations
                 //var micros = geeklistClient.MicroOperations.GetUserMicrosAsync().Result;
@@ -136,7 +167,7 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
                 //micro = geeklistClient.MicroOperations.GetMicro("5022d9ad5fcb3b02000045ac");
                 //var newMicro = geeklistClient.MicroOperations.CreateMicroAsync("Test micro via the API from CSharp.Geeklist part 1").Result;
                 //newMicro = geeklistClient.MicroOperations.CreateMicro("Test micro via the API from CSharp.Geeklist part 2");
-                //newMicro = geeklistClient.MicroOperations.CreateMicroAsync("Test micro via the API from CSharp.Geeklist part 3", "5059e0a4b542be83330000b3").Result;
+                //var newMicro = geeklistClient.MicroOperations.CreateMicroAsync("Test micro via the API from CSharp.Geeklist part 3", "5059e0a4b542be83330000b3").Result;
                 //newMicro = geeklistClient.MicroOperations.CreateMicro("Test micro via the API from CSharp.Geeklist part 4", "5059e099b542be83330000ad");
 
 				//Highfive operations
