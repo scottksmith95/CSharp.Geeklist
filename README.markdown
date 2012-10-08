@@ -11,6 +11,7 @@ Features
   - Follower
   - Following
   - Highfive
+  - Links (coming soon when API bugs are fixed by Geeklist)
   - Micro
   - User
 - ASP.NET MVC 3 example project
@@ -25,6 +26,4 @@ Resources
 Warnings
 --------
 
-- The Geeklist API is beta and under active development.
-- The wrapper currently points to the sandbox for development and testing.
-- Jason Chapel has informed me Activities will recieve a major overhaul.
+- The Geeklist API is live but has bugs with Links. Links are implemented but commented out. Use at your own risk.
