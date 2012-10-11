@@ -116,10 +116,16 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
                 //links = geeklistClient.LinkOperations.GetPopularLinks("javascript");
                 //links = geeklistClient.LinkOperations.GetPopularLinksAsync(1, 50, "javascript").Result;
                 //links = geeklistClient.LinkOperations.GetPopularLinks(1, 50, "javascript");
-                //var link = geeklistClient.LinkOperations.GetLinkAsync("50270fad2d3cfc0200011122").Result;
-                //link = geeklistClient.LinkOperations.GetLink("50270fad2d3cfc0200011122");
-                //var newLink = geeklistClient.LinkOperations.CreateLinkAsync("Test card via API from CSharp.Geeklist part 1").Result;
-                //newLink = geeklistClient.LinkOperations.CreateLink("Test card via API from CSharp.Geeklist part 2");
+                //var link = geeklistClient.LinkOperations.GetLinkAsync("50749baaafc2e702000311d2").Result;
+                //link = geeklistClient.LinkOperations.GetLink("50749baaafc2e702000311d2");
+                //var newLink = geeklistClient.LinkOperations.CreateLinkAsync("https://coderbits.com", "Test link via API from CSharp.Geeklist with defaults").Result;
+                //newLink = geeklistClient.LinkOperations.CreateLink("https://coderbits.com/features", "Test link via API from CSharp.Geeklist with category", category: "Test category");
+                //newLink = geeklistClient.LinkOperations.CreateLink("https://coderbits.com/about", "Test link via API from CSharp.Geeklist with description", description: "Test description");
+                //newLink = geeklistClient.LinkOperations.CreateLink("http://coderbits.com", "Test link via API from CSharp.Geeklist with communities", communities: "javascript");
+                //geeklistClient.LinkOperations.Vote(VoteType.Up, "5076f65f185741020000fa82");
+                //geeklistClient.LinkOperations.Vote(VoteType.Down, "5076f65f185741020000fa82");
+                //geeklistClient.LinkOperations.VoteAsync(VoteType.Up, "5076f65f185741020000fa82");
+                //geeklistClient.LinkOperations.VoteAsync(VoteType.Down, "5076f65f185741020000fa82");
 
 				//Activity operations
                 //var activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync().Result;
@@ -134,25 +140,20 @@ namespace CSharp.Geeklist.MVC_3_Example.Controllers
                 //activites = geeklistClient.ActivityOperations.GetAllActivities();
                 //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(1, 50).Result;
                 //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50);
-                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(ActivityType.Micro).Result;
-                //activites = geeklistClient.ActivityOperations.GetUserActivities(ActivityType.Micro);
-                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("creationix", ActivityType.Micro).Result;
-                //activites = geeklistClient.ActivityOperations.GetUserActivities("shl", ActivityType.Micro);
-                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync(1, 50, ActivityType.Micro).Result;
-                //activites = geeklistClient.ActivityOperations.GetUserActivities(1, 50, ActivityType.Micro);
-                //activites = geeklistClient.ActivityOperations.GetUserActivitiesAsync("kcorwin", 1, 50, ActivityType.Micro).Result;
-                //activites = geeklistClient.ActivityOperations.GetUserActivities("shl", 1, 50, ActivityType.Micro);
-                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(ActivityType.Micro).Result;
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(ActivityType.Micro);
-                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(1, 50, ActivityType.Micro).Result;
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Card);
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Contributor);
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Follow);
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Highfive);
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Micro);
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Profile);
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Repo);
-                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, ActivityType.Signup);
+                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(FilterType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(FilterType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetAllActivitiesAsync(1, 50, FilterType.Micro).Result;
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, FilterType.Card);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, FilterType.Link);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, FilterType.Follow);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, FilterType.Highfive);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, FilterType.Micro);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, FilterType.Vote);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, feed: FeedType.At);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, feed: FeedType.Community);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, feed: FeedType.Discovery);
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, hash: "gktwtlst");
+                //activites = geeklistClient.ActivityOperations.GetAllActivities(1, 50, start: "50296ebf2a854bad2000000f");
 
 				//Micro operations
                 //var micros = geeklistClient.MicroOperations.GetUserMicrosAsync().Result;
