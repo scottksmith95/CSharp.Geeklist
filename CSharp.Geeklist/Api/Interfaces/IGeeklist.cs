@@ -64,10 +64,10 @@ namespace CSharp.Geeklist.Api.Interfaces
         /// </summary>
         IConnectionOperations ConnectionOperations { get; }
 
-        ///// <summary>
-        ///// Gets the portion of the Geeklist API containing the link operations.
-        ///// </summary>
-        //ILinkOperations LinkOperations { get; }
+        /// <summary>
+        /// Gets the portion of the Geeklist API containing the link operations.
+        /// </summary>
+        ILinkOperations LinkOperations { get; }
 
 		/// <summary>
 		/// Gets the portion of the Geeklist API containing the activity operations.

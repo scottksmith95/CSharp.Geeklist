@@ -20,29 +20,12 @@
 
 namespace CSharp.Geeklist.Api.Enums
 {
-	/// <summary>
-	/// Types of activities
-	/// </summary>
-	public enum FilterType
-	{
-		All,
-        Micro, 
-        Card, 
-        Link, 
-        Highfive, 
-        Follow, 
-        Vote, 
-        Commit
-	}
-
     /// <summary>
-    /// Types of feeds
+    /// Types of activities
     /// </summary>
-    public enum FeedType
+    public enum VoteType
     {
-        AuthenticatedUser,
-        Discovery, 
-        At, 
-        Community
+        Up,
+        Down,
     }
 }

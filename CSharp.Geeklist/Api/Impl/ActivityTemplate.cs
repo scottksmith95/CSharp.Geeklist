@@ -43,77 +43,79 @@ namespace CSharp.Geeklist.Api.Impl
 
 		#region IActivityOperations Members
 
-		public ActivitiesResponse GetUserActivities(ActivityType type)
+		public ActivitiesResponse GetUserActivities()
 		{
-			return GetUserActivities(1, 10, type);
+			return GetUserActivities(1, 10);
 		}
 
-		public ActivitiesResponse GetUserActivities(int page, int count, ActivityType type)
+		public ActivitiesResponse GetUserActivities(int page, int count)
 		{
 			EnsureIsAuthorized();
 			var parameters = BuildPagingParametersWithCount(page, count);
-			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
 			return _restTemplate.GetForObject<ActivitiesResponse>(BuildUrl("user/activity", parameters));
 		}
 
-		public ActivitiesResponse GetUserActivities(string screenName, ActivityType type)
+		public ActivitiesResponse GetUserActivities(string screenName)
 		{
-			return GetUserActivities(screenName, 1, 10, type);
+			return GetUserActivities(screenName, 1, 10);
 		}
 
-		public ActivitiesResponse GetUserActivities(string screenName, int page, int count, ActivityType type)
+		public ActivitiesResponse GetUserActivities(string screenName, int page, int count)
 		{
 			var parameters = BuildPagingParametersWithCount(page, count);
-			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
 			return _restTemplate.GetForObject<ActivitiesResponse>(BuildUrl("users/" + screenName + "/activity", parameters));
 		}
 
-		public ActivitiesResponse GetAllActivities(ActivityType type)
+		public ActivitiesResponse GetAllActivities(FilterType filter, FeedType feed, string hash, string start)
 		{
-			return GetAllActivities(1, 10, type);
+			return GetAllActivities(1, 10, filter, feed, hash, start);
 		}
 
-		public ActivitiesResponse GetAllActivities(int page, int count, ActivityType type)
+        public ActivitiesResponse GetAllActivities(int page, int count, FilterType filter, FeedType feed, string hash, string start)
 		{
 			var parameters = BuildPagingParametersWithCount(page, count);
-			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			if (filter != FilterType.All) parameters.Add("filter", filter.ToString().ToLower());
+            if (feed != FeedType.AuthenticatedUser) parameters.Add("feed", feed.ToString().ToLower());
+            if (!string.IsNullOrEmpty(hash)) parameters.Add("hash", hash.ToString().ToLower());
+            if (!string.IsNullOrEmpty(start)) parameters.Add("start", start.ToString().ToLower());
 			return _restTemplate.GetForObject<ActivitiesResponse>(BuildUrl("activity", parameters));
 		}
 
-		public Task<ActivitiesResponse> GetUserActivitiesAsync(ActivityType type)
+		public Task<ActivitiesResponse> GetUserActivitiesAsync()
 		{
-			return GetUserActivitiesAsync(1, 10, type);
+			return GetUserActivitiesAsync(1, 10);
 		}
 
-		public Task<ActivitiesResponse> GetUserActivitiesAsync(int page, int count, ActivityType type)
+		public Task<ActivitiesResponse> GetUserActivitiesAsync(int page, int count)
 		{
 			EnsureIsAuthorized();
 			var parameters = BuildPagingParametersWithCount(page, count);
-			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
 			return _restTemplate.GetForObjectAsync<ActivitiesResponse>(BuildUrl("user/activity", parameters));
 		}
 
-		public Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, ActivityType type)
+		public Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName)
 		{
-			return GetUserActivitiesAsync(screenName, 1, 10, type);
+			return GetUserActivitiesAsync(screenName, 1, 10);
 		}
 
-		public Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, int page, int count, ActivityType type)
+		public Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, int page, int count)
 		{
 			var parameters = BuildPagingParametersWithCount(page, count);
-			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
 			return _restTemplate.GetForObjectAsync<ActivitiesResponse>(BuildUrl("users/" + screenName + "/activity", parameters));
 		}
 
-		public Task<ActivitiesResponse> GetAllActivitiesAsync(ActivityType type)
+        public Task<ActivitiesResponse> GetAllActivitiesAsync(FilterType filter, FeedType feed, string hash, string start)
 		{
-			return GetAllActivitiesAsync(1, 10, type);
+			return GetAllActivitiesAsync(1, 10, filter, feed, hash, start);
 		}
 
-		public Task<ActivitiesResponse> GetAllActivitiesAsync(int page, int count, ActivityType type)
+        public Task<ActivitiesResponse> GetAllActivitiesAsync(int page, int count, FilterType filter, FeedType feed, string hash, string start)
 		{
 			var parameters = BuildPagingParametersWithCount(page, count);
-			if (type != ActivityType.All) parameters.Add("type", type.ToString().ToLower());
+			if (filter != FilterType.All) parameters.Add("filter", filter.ToString().ToLower());
+            if (feed != FeedType.AuthenticatedUser) parameters.Add("feed", feed.ToString().ToLower());
+            if (!string.IsNullOrEmpty(hash)) parameters.Add("hash", hash.ToString().ToLower());
+            if (!string.IsNullOrEmpty(start)) parameters.Add("start", start.ToString().ToLower());
 			return _restTemplate.GetForObjectAsync<ActivitiesResponse>(BuildUrl("activity", parameters));
 		}
 

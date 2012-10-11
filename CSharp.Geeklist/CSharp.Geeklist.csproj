@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Api\Enums\Activity.cs" />
     <Compile Include="Api\Enums\Highfive.cs" />
+    <Compile Include="Api\Enums\Link.cs" />
     <Compile Include="Api\GeeklistApiError.cs" />
     <Compile Include="Api\GeeklistApiException.cs" />
     <Compile Include="Api\Impl\AbstractGeeklistOperations.cs" />

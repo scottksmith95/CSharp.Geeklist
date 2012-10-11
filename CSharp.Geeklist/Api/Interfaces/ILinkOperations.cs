@@ -20,6 +20,7 @@
 
 using System.Threading.Tasks;
 using CSharp.Geeklist.Api.Models;
+using CSharp.Geeklist.Api.Enums;
 
 namespace CSharp.Geeklist.Api.Interfaces
 {
@@ -111,6 +112,14 @@ namespace CSharp.Geeklist.Api.Interfaces
         LinkResponse CreateLink(string url, string title, string category = null, string description = null, string communities = null);
 
         /// <summary>
+        /// Votes on the specified link
+        /// </summary>
+        /// <param name="vote">The direction to vote on the link - Up or Down</param>
+        /// <param name="itemId">The id of the link to be voted on.</param>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        void Vote(VoteType vote, string itemId);
+
+        /// <summary>
         /// Asynchronously retrieves the first 10 links of the authenticated user.
         /// </summary>
         /// <returns>A <see cref="LinksResponse"/> with links of the authenticated user.</returns>
@@ -190,5 +199,13 @@ namespace CSharp.Geeklist.Api.Interfaces
         /// <returns>The created <see cref="LinkResponse"/>.</returns>
         /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
         Task<LinkResponse> CreateLinkAsync(string url, string title, string category = null, string description = null, string communities = null);
+
+        /// <summary>
+        /// Asynchronously votes on the specified link
+        /// </summary>
+        /// <param name="vote">The direction to vote on the link - Up or Down</param>
+        /// <param name="itemId">The id of the link to be voted on.</param>
+        /// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
+        Task VoteAsync(VoteType vote, string itemId);
     }
 }

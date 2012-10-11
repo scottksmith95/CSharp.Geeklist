@@ -33,10 +33,9 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// <summary>
 		/// Retrieves the first 10 activities of the authenticated user.
 		/// </summary>
-		/// <param name="type">The type of activities to return.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		ActivitiesResponse GetUserActivities(ActivityType type = ActivityType.All);
+		ActivitiesResponse GetUserActivities();
 
 		/// <summary>
 		/// Retrieves activities of the authenticated user.
@@ -46,19 +45,17 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <param name="type">The type of activities to return.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		ActivitiesResponse GetUserActivities(int page, int count, ActivityType type = ActivityType.All);
+		ActivitiesResponse GetUserActivities(int page, int count);
 
 		/// <summary>
 		/// Retrieves the first 10 activities of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose activities are being requested.</param>
-		/// <param name="type">The type of activities to return.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		ActivitiesResponse GetUserActivities(string screenName, ActivityType type = ActivityType.All);
+		ActivitiesResponse GetUserActivities(string screenName);
 
 		/// <summary>
 		/// Retrieves activities of the given user.
@@ -69,18 +66,20 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <param name="type">The type of activities to return.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		ActivitiesResponse GetUserActivities(string screenName, int page, int count, ActivityType type = ActivityType.All);
+		ActivitiesResponse GetUserActivities(string screenName, int page, int count);
 
 		/// <summary>
 		/// Retrieves the first 10 activities from all users
 		/// </summary>
-		/// <param name="type">The type of activities to return.</param>
+		/// <param name="filter">The filter of activities to return.</param>
+        /// <param name="feed">The activity feed to return.</param>
+        /// <param name="hash">Hash will give you only micros that contain the hash (gklst) from the discovery feed.</param>
+        /// <param name="start">Since the activity feeds are sorted descending by date, you can specify a starting activity id and fetch any activities older than that id with the limit you set.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		ActivitiesResponse GetAllActivities(ActivityType type = ActivityType.All);
+		ActivitiesResponse GetAllActivities(FilterType filter = FilterType.All, FeedType feed = FeedType.AuthenticatedUser, string hash = null, string start = null);
 
 		/// <summary>
 		/// Retrieves activities from all users.
@@ -90,17 +89,20 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <param name="type">The type of activities to return.</param>
+		/// <param name="filter">The filter of activities to return.</param>
+        /// <param name="feed">The activity feed to return.</param>
+        /// <param name="hash">Hash will give you only micros that contain the hash (gklst) from the discovery feed.</param>
+        /// <param name="start">Since the activity feeds are sorted descending by date, you can specify a starting activity id and fetch any activities older than that id with the limit you set.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		ActivitiesResponse GetAllActivities(int page, int count, ActivityType type = ActivityType.All);
+        ActivitiesResponse GetAllActivities(int page, int count, FilterType filter = FilterType.All, FeedType feed = FeedType.AuthenticatedUser, string hash = null, string start = null);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 activities of the authenticated user.
 		/// </summary>
 		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<ActivitiesResponse> GetUserActivitiesAsync(ActivityType type = ActivityType.All);
+		Task<ActivitiesResponse> GetUserActivitiesAsync();
 
 		/// <summary>
 		/// Asynchronously retrieves activities of the authenticated user.
@@ -110,19 +112,17 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <param name="type">The type of activities to return.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of the authenticated user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<ActivitiesResponse> GetUserActivitiesAsync(int page, int count, ActivityType type = ActivityType.All);
+		Task<ActivitiesResponse> GetUserActivitiesAsync(int page, int count);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 activities of the given user.
 		/// </summary>
 		/// <param name="screenName">The screen name of the user whose activities are being requested.</param>
-		/// <param name="type">The type of activities to return.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, ActivityType type = ActivityType.All);
+		Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName);
 
 		/// <summary>
 		/// Asynchronously retrieves activities of the given user.
@@ -133,18 +133,20 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <param name="type">The type of activities to return.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of the specified user.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, int page, int count, ActivityType type = ActivityType.All);
+		Task<ActivitiesResponse> GetUserActivitiesAsync(string screenName, int page, int count);
 
 		/// <summary>
 		/// Asynchronously retrieves the first 10 activities from all users
 		/// </summary>
-		/// <param name="type">The type of activities to return.</param>
+		/// <param name="filter">The filter of activities to return.</param>
+        /// <param name="feed">The activity feed to return.</param>
+        /// <param name="hash">Hash will give you only micros that contain the hash (gklst) from the discovery feed.</param>
+        /// <param name="start">Since the activity feeds are sorted descending by date, you can specify a starting activity id and fetch any activities older than that id with the limit you set.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<ActivitiesResponse> GetAllActivitiesAsync(ActivityType type = ActivityType.All);
+        Task<ActivitiesResponse> GetAllActivitiesAsync(FilterType filter = FilterType.All, FeedType feed = FeedType.AuthenticatedUser, string hash = null, string start = null);
 
 		/// <summary>
 		/// Asynchronously retrieves activities from all users.
@@ -154,9 +156,12 @@ namespace CSharp.Geeklist.Api.Interfaces
 		/// The number of <see cref="ActivitiesResponse"/> per page. Should be less than or equal to 50. 
 		/// (Will return at most 50 entries, even if count is greater than 50)
 		/// </param>
-		/// <param name="type">The type of activities to return.</param>
+		/// <param name="filter">The filter of activities to return.</param>
+        /// <param name="feed">The activity feed to return.</param>
+        /// <param name="hash">Hash will give you only micros that contain the hash (gklst) from the discovery feed.</param>
+        /// <param name="start">Since the activity feeds are sorted descending by date, you can specify a starting activity id and fetch any activities older than that id with the limit you set.</param>
 		/// <returns><see cref="ActivitiesResponse"/> of all users.</returns>
 		/// <exception cref="GeeklistApiException">If there is an error while communicating with Geeklist.</exception>
-		Task<ActivitiesResponse> GetAllActivitiesAsync(int page, int count, ActivityType type = ActivityType.All);
+        Task<ActivitiesResponse> GetAllActivitiesAsync(int page, int count, FilterType filter = FilterType.All, FeedType feed = FeedType.AuthenticatedUser, string hash = null, string start = null);
 	}
 }

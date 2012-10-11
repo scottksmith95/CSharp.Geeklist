@@ -151,13 +151,13 @@ namespace CSharp.Geeklist.Api.Impl
             get { return _connectionOperations; }
         }
 
-        ///// <summary>
-        ///// Gets the portion of the Geeklist API containing the link operations.
-        ///// </summary>
-        //public ILinkOperations LinkOperations
-        //{
-        //    get { return _linkOperations; }
-        //}
+        /// <summary>
+        /// Gets the portion of the Geeklist API containing the link operations.
+        /// </summary>
+        public ILinkOperations LinkOperations
+        {
+            get { return _linkOperations; }
+        }
 
 		/// <summary>
 		/// Gets the portion of the Geeklist API containing the activity operations.

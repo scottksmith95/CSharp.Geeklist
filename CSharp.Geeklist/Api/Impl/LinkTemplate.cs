@@ -23,6 +23,8 @@ using CSharp.Geeklist.Api.Interfaces;
 using CSharp.Geeklist.Api.Models;
 using Spring.Rest.Client;
 using System.Threading.Tasks;
+using Spring.Http;
+using CSharp.Geeklist.Api.Enums;
 
 namespace CSharp.Geeklist.Api.Impl
 {
@@ -96,6 +98,13 @@ namespace CSharp.Geeklist.Api.Impl
             return _restTemplate.PostForObject<LinkResponse>("links", request);
         }
 
+        public void Vote(VoteType vote, string itemId)
+        {
+            EnsureIsAuthorized();
+            var request = new NameValueCollection { { "direction", vote.ToString().ToLower()} };
+            _restTemplate.Put("links/" + itemId + "/vote", request);
+        }
+
         public Task<LinksResponse> GetUserLinksAsync()
         {
             return GetUserLinksAsync(1, 10);
@@ -148,6 +157,13 @@ namespace CSharp.Geeklist.Api.Impl
             if (!string.IsNullOrEmpty(communities))
                 request.Add(new NameValueCollection { { "communities", communities } });
             return _restTemplate.PostForObjectAsync<LinkResponse>("links", request);
+        }
+
+        public Task VoteAsync(VoteType vote, string itemId)
+        {
+            EnsureIsAuthorized();
+            var request = new NameValueCollection { { "direction", vote.ToString().ToLower() } };
+            return _restTemplate.PutAsync("links/" + itemId + "/vote", request);
         }
 
         #endregion
